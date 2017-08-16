@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.3'
+    useLibrary 'org.apache.http.legacy'
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
+    defaultConfig {
+        applicationId "com.game.helper"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 11
+        versionName "2.0.3"
+        multiDexEnabled true
+    }
+
+    allprojects {
+        repositories {
+            mavenCentral()
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        /*huawei c360 baidu yingyongbao ppzhushou meizu xiaomi pc h5*/
+        huawei {}
+        c360 {}
+        baidu {}
+        yingyongbao {}
+        ppzhushou {}
+        meizu {}
+        xiaomi {}
+        pc {}
+        h5 {}
+        other {}
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
+}
+
+dependencies {
+
+    /*compile fileTree(include: ['*.jar'], dir: 'libs')*/
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile project(':androidautoscrollviewpager')
+    compile project(':androidSchedulers')
+    compile project(':bbxpc_android_lib_MyListView')
+    compile project(':leopard')
+    compile project(':libs_wheel')
+    compile project(':pullToRefreshAndLoad')
+    compile project(':trineaandroidcommon')
+    compile files('libs/alipaySdk-20160802.jar')
+    compile files('libs/core-3.1.0.jar')
+    compile files('libs/eventbus.jar')
+    compile files('libs/ShareSDK-Wechat-Core-2.7.7.jar')
+    compile files('libs/MobCommons-2016.0830.1940.jar')
+    compile files('libs/ShareSDK-QZone-2.7.7.jar')
+    compile files('libs/libammsdk.jar')
+    compile files('libs/ShareSDK-Wechat-2.7.7.jar')
+    compile files('libs/ShareSDK-SinaWeibo-2.7.7.jar')
+    provided files('libs/okio-1.6.0.jar')
+    compile files('libs/ShareSDK-QQ-2.7.7.jar')
+    compile files('libs/MobTools-2016.0830.1940.jar')
+    compile files('libs/jpush-android-2.2.0.jar')
+    compile files('libs/locSDK_6.13.jar')
+    compile files('libs/ShareSDK-Core-2.7.7.jar')
+    //compile files('libs/okhttp-2.5.0.jar')
+    compile files('libs/glide-3.7.0.jar')
+    compile files('libs/tbs_sdk_thirdapp_v2.5.0.1031_36880_sharewithdownload_obfs_20161107_154437.jar')
+    compile files('libs/nineoldanimatin.jar')
+    compile files('libs/ShareSDK-Wechat-Moments-2.7.7.jar')
+    compile files('libs/universal-image-loader-1.9.0.jar')
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.baoyz.swipemenulistview:library:1.3.0'
+    compile files('libs/okhttp-2.5.0.jar')
+    compile files('libs/open_sdk_r5788.jar')
+    compile files('libs/mta-sdk-1.6.2.jar')
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.github.hotchemi:permissionsdispatcher:2.1.2'
+    apt "com.github.hotchemi:permissionsdispatcher-processor:2.1.2"
+    compile files('libs/org.apache.http.legacy.jar')
+}

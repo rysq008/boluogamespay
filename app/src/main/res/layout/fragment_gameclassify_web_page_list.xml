@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.game.helper.fragment.home.HomePageListNewGameFragment">
+    <com.jingchen.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/game_web_refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/line"
+        android:layout_below="@id/ll_sortingdirectory">
+
+    <include layout="@layout/refresh_head_r"
+        android:visibility="gone"
+        />
+    <!-- 支持所有实现Pullable接口的View -->
+
+    <com.jingchen.pulltorefresh.pullableview.PullableScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+    <ListView
+        android:id="@+id/classify_webgame_pagelist_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#ffffffff"
+        android:divider="@null"
+        android:gravity="center"
+        android:scrollbars="none" />
+        </LinearLayout>
+    </com.jingchen.pulltorefresh.pullableview.PullableScrollView>
+
+        <include layout="@layout/load_more_r" />
+    </com.jingchen.pulltorefresh.PullToRefreshLayout>
+
+</FrameLayout>

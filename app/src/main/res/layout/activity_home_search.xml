@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!-- 头部导航 -->
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_layout_higher"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_search_layout" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/mLinearLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/mLinear1"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/shouye_250" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="热门搜索"
+                        android:textColor="@color/light_blue"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/mView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/gh_qianhui_color" />
+
+                <com.game.helper.view.widget.MyScrollviewGridView
+                    android:id="@+id/search_gridview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:horizontalSpacing="5.0dip"
+                    android:listSelector="@null"
+                    android:numColumns="4"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:scrollbars="none"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="5.0dip" />
+
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/shouye_250" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="历史搜索"
+                        android:textColor="@color/light_blue"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/cleanHistory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/shouye_15" />
+
+                </LinearLayout>
+
+                <com.game.helper.view.widget.ListViewForScrollView
+                    android:id="@+id/search_ListView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@color/white"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:fadingEdge="none"
+                    android:gravity="center"
+                    android:listSelector="@null"
+                    android:scrollbars="none"></com.game.helper.view.widget.ListViewForScrollView>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dp" />
+            </LinearLayout>
+
+            <com.jingchen.pulltorefresh.PullToRefreshLayout
+                android:id="@+id/select_refresh_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ll_sortingdirectory"
+                android:background="@color/line">
+
+                <include
+                    layout="@layout/refresh_head_r"
+                    android:visibility="gone" />
+
+                <com.jingchen.pulltorefresh.pullableview.PullableScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.game.helper.view.widget.ListViewForScrollView
+                            android:id="@+id/searchGameResult_listView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:cacheColorHint="@color/white"
+                            android:divider="@null"
+                            android:dividerHeight="0dp"
+                            android:fadingEdge="none"
+                            android:gravity="center"
+                            android:listSelector="@null"
+                            android:scrollbars="none"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+                </com.jingchen.pulltorefresh.pullableview.PullableScrollView>
+
+                <include layout="@layout/load_more_r" />
+            </com.jingchen.pulltorefresh.PullToRefreshLayout>
+
+            <com.game.helper.view.widget.ListViewForScrollView
+                android:id="@+id/searchGiftResult_listView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/white"
+                android:cacheColorHint="@color/white"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:fadingEdge="none"
+                android:gravity="center"
+                android:listSelector="@null"
+                android:scrollbars="none"
+                android:visibility="gone" />
+        </LinearLayout>
+
+</LinearLayout>

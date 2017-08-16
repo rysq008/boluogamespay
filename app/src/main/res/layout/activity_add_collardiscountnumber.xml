@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <!-- 头部导航 -->
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_layout_higher" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/login_ed_shape"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/shouye_35_pt" />
+
+                <TextView
+                    android:id="@+id/tv_value"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="left|center_vertical"
+                    android:hint="选择客户端"
+                    android:singleLine="true"
+                    android:textColor="@color/gh_shenhui_color"
+                    android:textColorHint="@color/gh_qianhui_color"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/bt_dropdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="13dp"
+                    android:src="@drawable/shouye_07" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="290dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/login_ed_shape"
+                android:gravity="center"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/shouye_35_yx" />
+
+                <EditText
+                    android:id="@+id/et_code"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入游戏账号"
+                    android:imeOptions="actionNext"
+                    android:maxLength="35"
+                    android:paddingLeft="12dip"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/gh_shenhui_color"
+                    android:textColorHint="@color/gh_qianhui_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="290dp"
+                android:visibility="invisible"
+                android:layout_height="49dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/login_ed_shape"
+                android:gravity="center"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/shouye_65" />
+
+                <EditText
+                    android:id="@+id/et_userpwd"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入游戏密码"
+                    android:imeOptions="actionNext"
+                    android:maxLength="35"
+                    android:paddingLeft="12dip"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/gh_shenhui_color"
+                    android:textColorHint="@color/gh_qianhui_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dip"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/btn_adds"
+                    android:layout_width="fill_parent"
+                    android:layout_height="49dip"
+                    android:layout_marginLeft="30dip"
+                    android:layout_marginRight="30dip"
+                    android:background="@drawable/login_btn_shape__selector"
+                    android:clickable="true"
+                    android:text="添       加"
+                    android:textColor="@color/gh_white_to_maincolor_selector"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

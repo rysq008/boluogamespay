@@ -1,0 +1,94 @@
+<resources>
+    <!-- <string name="app_name">My Application</string>-->
+
+    <string name="app_name">G9游戏</string>
+    <string name="no_network">网络不给力，请稍后再试</string>
+    <string name="no_network1">服务器无反应，请稍后再试</string>
+
+    <string name="ok">确定</string>
+    <string name="mydailog_title">提醒</string>
+    <string name="removeItem">删除</string>
+    <string name="pwd_character_types">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="err_phone">手机号格式不正确</string>
+
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unknown">发送返回</string>
+    <string name="only_choose_num">超出可选图片张数</string>
+
+
+    <string name="request_fail">服务端响应失败，请稍后再试</string>
+    <string name="link_fail">   连接服务端失败，请检查网络连接</string>
+    <string name="upgrade_fail">更新过程出现异常\n请重新检测更新</string>
+
+    <string name="downloading">正在下载中...</string>
+    <string name="downloa_complete">下载完成</string>
+    <string name="downloa_start">开始下载</string>
+    <string name="downloa_fail">下载失败</string>
+    <string name="downloa_stop">下载完成</string>
+    <string name="forced_update">更新后使用</string>
+
+    <string name="mydailog_update_content">发现新版本，是否要马上更新？</string>
+    <string name="mydailog_update_content2">你好，有新版本可以更新啦！</string>
+    <string name="mydailog_update_latest">当前已经是最新版本啦!</string>
+    <string name="mydailog_cancel_update">稍后更新</string>
+    <string name="mydailog_confirm_update">马上更新</string>
+    <string name="mydailog_confirm">确定</string>
+
+    <!-- download -->
+    <string name="downloaded">下载完成</string>
+    <string name="install">下载完成,点击安装</string>
+    <string name="upgrade">正在升级</string>
+    <string name="download_ready">准备下载中</string>
+
+    <string name="sale_step">折扣步骤</string>
+    <string name="ranking_list">排行榜</string>
+    <string name="trading_brokerage">交易回购</string>
+    <string name="fast_pay">快速充值</string>
+    <string name="home_game_hall">游戏大厅</string>
+    <string name="home_game_task">任务赚钱</string>
+    <string name="home_game_hall_state">2.5折起5000余款游戏任选</string>
+    <string name="home_game_task_state">邀请好友赚现金</string>
+    <string name="home_new_show">新游上架</string>
+    <string name="home_hot_show">热门推荐</string>
+    <string name="home_sale_show">特价推荐</string>
+
+    <string name="home_game_select_autostep">自动折扣步骤（新手必读）</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="game_classify_tag_one">折扣专区</string>
+    <string name="game_classify_tag_two">回收专区</string>
+    <string name="game_classify_tag_three">变态手游</string>
+    <string name="game_classify_tag_four">手机页游</string>
+    <string name="title_activity_login2">Sign in</string>
+    <string name="pay_state">支付状态 : </string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+
+    <string name="login_with_wechat">用微信登录</string>
+    <string name="login_with_qzone">用QQ空间登录</string>
+    <string name="login_with_other_plat">其他帐号登录</string>
+
+    <string name="userid_found">用户信息已存在，正在跳转登录操作…</string>
+    <string name="logining">使用%s帐号登录中…</string>
+    <string name="auth_cancel">授权操作已取消</string>
+    <string name="auth_error">授权操作遇到错误，请阅读Logcat输出</string>
+    <string name="auth_complete">授权成功，正在跳转登录操作…</string>
+    <string name="if_register_needed">如果您需要注册功能…</string>
+    <string name="after_auth">一般来说第三方登录时，第三方平台已经为您完成用户身份校验，您可以放心让用户登录。\n\n但如果您需要判断用户是否为新用户，可以在授权操作完成后，将用户的信息通过字段“HashMap userInfo”携带给login方法。客户端通过“String userId”执行登录请求，如果服务端判定此userId为未注册用户，可以将userInfo发送给注册接口，获取用户在此平台上的昵称、头像等数据，然后执行注册</string>
+
+</resources>

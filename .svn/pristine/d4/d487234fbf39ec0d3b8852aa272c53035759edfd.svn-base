@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFf4f4f4"
+    android:orientation="vertical" >
+
+    <!-- 头部导航 -->
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_layout_higher"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_search_layout" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#c9c9c9" />
+
+    <ListView
+        android:id="@+id/lv_searchSociatyMember"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:cacheColorHint="#ffffffff"
+        android:divider="@null"
+        android:gravity="center"
+        android:scrollbars="none" >
+    </ListView>
+
+</LinearLayout>

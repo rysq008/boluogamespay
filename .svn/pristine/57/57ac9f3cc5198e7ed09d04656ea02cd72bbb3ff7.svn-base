@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFf4f4f4"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_sortingdirectory"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/ll_all"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_merchantsall_name"
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    android:text="全部分类"
+                    android:textColor="@color/gh_qianhui_to_maincolor_selector"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_merchantsall_image"
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:src="@drawable/sortingdirectory_seletor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_sorting"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_sorting_name"
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    android:text="默认排序"
+                    android:textColor="@color/gh_qianhui_to_maincolor_selector"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_sorting_image"
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:src="@drawable/sortingdirectory_seletor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <GridView
+                    android:id="@+id/listView_Classify"
+                    android:layout_width="fill_parent"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:cacheColorHint="@color/white"
+                    android:gravity="center"
+                    android:listSelector="@null"
+                    android:numColumns="3"
+                    android:scrollbars="none"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="0.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_lina"
+            android:layout_width="match_parent"
+            android:layout_height="6px"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ll_sortingdirectory"
+            android:background="@color/white" />
+
+        <ListView
+            android:id="@+id/listView_gameClassify"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/v_lina"
+            android:background="@color/white"
+            android:cacheColorHint="#ffffffff"
+            android:divider="@null"
+            android:gravity="center"
+            android:scrollbars="none"></ListView>
+
+    </RelativeLayout>
+
+</LinearLayout>

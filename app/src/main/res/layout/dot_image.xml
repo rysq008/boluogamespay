@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/face_dot"
+    android:layout_width="@dimen/DIMEN_20DP"
+    android:layout_height="@dimen/DIMEN_20DP"
+    android:layout_gravity="center"
+    android:layout_marginLeft="@dimen/DIMEN_4DP"
+    android:scaleType="fitXY"
+     android:background="@drawable/selector_circle_blue"/>

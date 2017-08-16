@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_refresh.xml",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_refresh.xml"
+    },
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\progress_dialog.xml",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\layout\\progress_dialog.xml"
+    },
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\load_more.xml",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\layout\\load_more.xml"
+    },
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\refresh_head.xml",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\layout\\refresh_head.xml"
+    }
+]

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/share"
+    android:orientation="vertical">
+
+    <!-- 头部导航 -->
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_layout_higher"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/DIMEN_20DP"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/top_left_layout1"
+            android:layout_width="80dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/topLeftBack1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/shouye_03" />
+        </LinearLayout>
+
+        <!-- <TextView -->
+        <!-- android:id="@+id/top_title2" -->
+        <!-- android:layout_marginLeft="40dp" -->
+        <!-- android:layout_alignParentLeft="true" -->
+        <!-- android:layout_width="80dp" -->
+        <!-- android:layout_height="fill_parent" -->
+        <!-- android:gravity="center_vertical|left" -->
+        <!-- android:text="点击邀请" -->
+        <!-- android:textColor="@color/white" -->
+        <!-- android:textSize="14sp" -->
+        <!-- android:visibility="visible" /> -->
+
+        <TextView
+            android:id="@+id/top_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:maxWidth="230dp"
+            android:singleLine="true"
+            android:text="邀请好友"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/topRight1"
+            android:layout_width="100dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text="邀请攻略"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="230dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/invite_background" />
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent" />
+            <TextView
+                android:id="@+id/tv_save"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/gh_maincolor_line_shape_15"
+                android:gravity="center"
+                android:text="保存二维码到手机"
+                android:textColor="@color/share"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DIMEN_20DP"
+                android:gravity="center_horizontal"
+                android:text="奖励规则"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DIMEN_10DP"
+                android:gravity="center_horizontal"
+                android:text="您邀请的好友在G9游戏充值\n您将获得续充支付金额5%的金币奖励\n多邀多得，不设上限！"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:id="@+id/top_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/gh_maincolor_line_shape_15"
+                    android:gravity="center"
+                    android:text="点击分享"
+                    android:textColor="@color/share"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DIMEN_20DP"
+                android:layout_marginBottom="@dimen/DIMEN_20DP"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/share_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/DIMEN_30DP"
+                    android:text="邀请记录"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+                <View
+                    android:layout_width="@dimen/DIMEN_2DP"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    />
+                <TextView
+                    android:id="@+id/share_get"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="邀请收益"
+                    android:gravity="left"
+                    android:paddingLeft="@dimen/DIMEN_30DP"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

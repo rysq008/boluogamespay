@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/layout_dailog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/shape_corners_nor1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_horizontal"
+            android:text="提醒"
+            android:textColor="#000000"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:text="预计费用40元"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/gh_shenhui_color"
+            android:textSize="14dp" />
+        <TextView
+            android:id="@+id/tv_contentT"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:text="预计费用40元"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/red"
+            android:textSize="14dp" />
+        
+        <View
+            android:id="@+id/msView"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="20dp"
+            android:background="#dadada" />
+
+        <LinearLayout
+            android:id="@+id/layout_double"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_cencel"
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_corners_lb"
+                android:gravity="center_horizontal"
+                android:text="不允许"
+                android:textColor="@color/light_blue" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#dadada" />
+
+            <Button
+                android:id="@+id/btn_confirm"
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_corners_rb"
+                android:gravity="center_horizontal"
+                android:text="允许"
+                android:textColor="@color/light_blue" />
+        </LinearLayout>
+            <Button
+                android:id="@+id/btn_single"
+                style="@style/textview"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_corners_rb"
+                android:gravity="center_horizontal"
+                android:text="允许"
+                android:textColor="@color/light_blue" />
+    </LinearLayout>
+
+</LinearLayout>

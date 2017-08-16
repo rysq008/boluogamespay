@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mine_background"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DIMEN_40DP"
+            android:layout_marginTop="@dimen/DIMEN_15DP"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/mine_seting_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/DIMEN_10DP"
+                android:src="@drawable/mine_tool" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的"
+                android:layout_centerInParent="true"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                />
+
+            <ImageView
+                android:id="@+id/mine_top_message_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/DIMEN_10DP"
+                android:src="@drawable/home_nomessage" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/DIMEN_10DP"
+            android:orientation="horizontal">
+
+            <com.game.helper.view.widget.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imageView_pic"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/DIMEN_10DP"
+                android:src="@drawable/pic_moren" />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/DIMEN_10DP"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/mine_nikename_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="昵称"
+                        android:maxLength="8"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/mine_grade_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/DIMEN_20DP" />
+                </LinearLayout>
+                <!--
+                <TextView
+                    android:id="@+id/mine_mineid_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DIMEN_10DP"
+                    android:text="G9账号:xxxx"
+                    android:textColor="@color/white" />-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DIMEN_10DP"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/mine_f_attention"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/DIMEN_30DP"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="关注"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/weddingsNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/DIMEN_5DP"
+                            android:text="0"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mine_f_fans"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/DIMEN_30DP"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="粉丝"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/collect_Num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/DIMEN_5DP"
+                            android:text="0"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mine_f_gift"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/DIMEN_30DP"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="礼物"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/gift_Num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/DIMEN_5DP"
+                            android:text="0"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mine_account_manage_ll"
+                android:layout_width="@dimen/DIMEN_40DP"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <!--
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="账号管理"
+                    android:textColor="@color/white" />-->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/DIMEN_5DP"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mine_go_white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- <include
+         android:id="@+id/include"
+         layout="@layout/top_layout_higher" />-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--  <RelativeLayout
+               android:layout_width="fill_parent"
+               android:layout_height="75dp"
+               android:background="@color/white">
+
+               <ImageView
+                   android:id="@+id/mine_toiv"
+                   android:layout_width="fill_parent"
+                   android:layout_height="50dp"
+                   android:scaleType="fitXY"
+                   android:src="@drawable/tu_1" />
+
+             <com.game.helper.view.widget.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/imageView_pic"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/pic_moren" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/mine_moneyLinearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/gh_qianhui_color"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_userNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/gh_qianhui_color"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/wode_13" />
+                </LinearLayout>
+            </LinearLayout>-->
+            <!-- <ProgressBar
+                 android:id="@+id/pb_progressbar"
+                 style="@style/StyleProgressBarMini"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="30dp"
+                 android:background="@drawable/shape_progressbar_bg"
+                 android:max="100"
+                 android:progress="20" />-->
+            <!--<com.game.helper.view.widget.CustomProgressBar
+                android:id="@+id/item_progress_SeekBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:indeterminateOnly="false"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:max="100"
+                android:progress="60"
+                android:progressDrawable="@drawable/progressbar_drawable"
+                android:visibility="visible"  />-->
+
+<!--
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/mLayout1"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/gh_white_to_bgcolor_selector"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@color/gh_shenhui_color"
+                        android:textSize="23sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="我的关注"
+                        android:textColor="@color/gh_qianhui_color"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/_shiqu_68" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/gh_white_to_bgcolor_selector"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@color/gh_shenhui_color"
+                        android:textSize="23sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="我的粉丝"
+                        android:textColor="@color/gh_qianhui_color"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/_shiqu_71" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mLayout3"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/gh_white_to_bgcolor_selector"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@color/gh_shenhui_color"
+                        android:textSize="23sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="收到礼物"
+                        android:textColor="@color/gh_qianhui_color"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/_shiqu_74" />
+                </LinearLayout>
+            </LinearLayout>
+-->
+
+
+            <LinearLayout
+                android:id="@+id/mineLinearLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DIMEN_10DP"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/game_account_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/DIMEN_50DP"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/DIMEN_20DP"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_account_icon" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="我的游戏"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/tv_gift"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/DIMEN_50DP"
+                        android:layout_marginTop="@dimen/DIMEN_1DP"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/DIMEN_20DP"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_gift_icon" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="游戏礼包"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/mine_share"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/DIMEN_50DP"
+                        android:layout_marginTop="@dimen/DIMEN_10DP"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/DIMEN_20DP"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_invite_icon" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="邀请记录"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/tv_earnings"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/DIMEN_50DP"
+                        android:layout_marginTop="@dimen/DIMEN_0.5DP"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="@dimen/DIMEN_20DP"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_earnings_icon" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="推广收益"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/tv_gameorder"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/DIMEN_50DP"
+                        android:layout_marginTop="@dimen/DIMEN_0.5DP"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/DIMEN_20DP"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_order_icon" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="我的订单"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/tv_money"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/DIMEN_50DP"
+                        android:layout_marginTop="@dimen/DIMEN_10DP"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/DIMEN_20DP"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_gold_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:text="我的金币"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_moneyNum"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|right"
+                            android:text="0"
+                            android:textColor="@color/gh_qianhui_color"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/mine_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/DIMEN_50DP"
+                        android:layout_marginTop="@dimen/DIMEN_0.5DP"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/DIMEN_20DP"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/mine_feedback_icon" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="我的反馈"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>
+
+                   <!-- <LinearLayout
+                        android:id="@+id/tv_collcet"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="@dimen/DIMEN_10DP"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/wode_48" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="我的收藏"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DIMEN_10DP"
+                    android:gravity="center"
+                    android:orientation="vertical">
+<!--
+                    <LinearLayout
+                        android:id="@+id/tv_record_conversion"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/wode_48" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="兑换记录"
+                            android:textColor="@color/gh_shenhui_color"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/shouye_07" />
+                    </LinearLayout>-->
+
+
+                    <!-- <LinearLayout
+                         android:id="@+id/mine_seting"
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         android:gravity="center"
+                         android:orientation="vertical" >
+
+                         <ImageView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginTop="10dp"
+                             android:src="@drawable/wode_126" />
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginBottom="10dp"
+                             android:layout_marginTop="5dp"
+                             android:gravity="center"
+                             android:text="我的设置"
+                             android:textColor="@color/gh_shenhui_color"
+                             android:textSize="12sp" />
+                     </LinearLayout>-->
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--         <LinearLayout
+                         android:id="@+id/tv_Discount"
+                         android:layout_width="fill_parent"
+                         android:layout_height="44dp"
+                         android:background="@color/white"
+                         android:gravity="center"
+                         android:orientation="horizontal" >
+
+                         <ImageView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginLeft="10dp"
+                             android:src="@drawable/wode_48" />
+
+                         <TextView
+                             android:layout_width="0dp"
+                             android:layout_height="fill_parent"
+                             android:layout_marginLeft="10dp"
+                             android:layout_weight="1"
+                             android:gravity="center_vertical"
+                             android:text="我的折扣号"
+                             android:textColor="@color/gh_shenhui_color"
+                             android:textSize="16sp" />
+
+                         <ImageView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginRight="10dp"
+                             android:src="@drawable/shouye_07" />
+                     </LinearLayout>-->
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

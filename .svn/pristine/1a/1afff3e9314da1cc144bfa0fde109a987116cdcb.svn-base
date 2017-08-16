@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFf4f4f4"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/home_ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_70DP"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/nav_background"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/classify_topLeftBack"
+            android:layout_width="@dimen/DIMEN_40DP"
+            android:layout_height="@dimen/DIMEN_30DP"
+            android:scaleType="centerInside"
+            android:layout_marginTop="@dimen/DIMEN_30DP"
+            android:layout_marginLeft="@dimen/DIMEN_10DP"
+            android:src="@drawable/shouye_03" />
+
+        <LinearLayout
+            android:id="@+id/game_classify_all_LinearLayout_searcher"
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/DIMEN_33DP"
+            android:layout_marginRight="@dimen/DIMEN_20DP"
+            android:layout_weight="1"
+            android:background="@drawable/citytopsearch_shape1"
+            android:gravity="center"
+            android:paddingLeft="6dp"
+            android:singleLine="true">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:padding="5dp"
+                android:src="@drawable/home_search" />
+
+            <TextView
+                android:id="@+id/tv_ser"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="6dp"
+                android:text="输入手游名称搜索"
+                android:textColor="@color/gh_qianhui_color"
+                android:textColorHint="@color/gh_qianhui_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/game_classify_top_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DIMEN_50DP"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_35DP"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/DIMEN_10DP"
+                android:layout_marginRight="@dimen/DIMEN_10DP"
+                android:background="@drawable/gh_maincolor_bg_gray_5" />
+
+            <LinearLayout
+                android:id="@+id/home_game_classify_title_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_35DP"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/DIMEN_10DP"
+                android:layout_marginRight="@dimen/DIMEN_10DP"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/classify_cursor_iv"
+                    android:layout_width="100dp"
+                    android:layout_height="@dimen/DIMEN_35DP"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/nav_select"
+                    android:scaleType="centerCrop" />
+                <!--android:background="@drawable/gh_maincolor_bg_shape_fillet_two_left_5"-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_35DP"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/DIMEN_10DP"
+                android:layout_marginRight="@dimen/DIMEN_10DP"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/game_classify_tv_guid1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/game_classify_tag_one"
+                    android:textColor="@color/gh_black_to_white_selector"
+                    android:textSize="14sp" />
+<!--
+
+                <TextView
+                    android:id="@+id/game_classify_tv_guid2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/game_classify_tag_two"
+                    android:textColor="@color/gh_black_to_white_selector"
+                    android:textSize="14sp" />
+-->
+
+                <TextView
+                    android:id="@+id/game_classify_tv_guid3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/game_classify_tag_three"
+                    android:textColor="@color/gh_black_to_white_selector"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/game_classify_tv_guid4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/game_classify_tag_four"
+                    android:textColor="@color/gh_black_to_white_selector"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/classify_showlist_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/game_classify_top_ll"
+            android:fadingEdge="none"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+
+        <!--<LinearLayout
+            android:id="@+id/ll_sortingdirectory"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/classify_showlist_viewPager"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/ll_all"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_merchantsall_name"
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    android:text="全部分类"
+                    android:textColor="@color/gh_qianhui_to_maincolor_selector"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_merchantsall_image"
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:src="@drawable/sortingdirectory_seletor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_sorting"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_sorting_name"
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    android:text="默认排序"
+                    android:textColor="@color/gh_qianhui_to_maincolor_selector"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_sorting_image"
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:src="@drawable/sortingdirectory_seletor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <GridView
+                    android:id="@+id/listView_Classify"
+                    android:layout_width="fill_parent"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:cacheColorHint="@color/white"
+                    android:gravity="center"
+                    android:listSelector="@null"
+                    android:numColumns="3"
+                    android:scrollbars="none"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="0.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_lina"
+            android:layout_width="match_parent"
+            android:layout_height="6px"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ll_sortingdirectory"
+            android:background="@color/white" />
+
+        <ListView
+            android:id="@+id/listView_gameClassify"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/v_lina"
+            android:background="@color/white"
+            android:cacheColorHint="#ffffffff"
+            android:divider="@null"
+            android:gravity="center"
+            android:scrollbars="none"
+            android:visibility="gone"></ListView>
+
+        <LinearLayout
+            android:id="@+id/ll_sortings"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/v_lina"
+            android:background="#7F000000"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ListView
+                android:id="@+id/lv_sortingone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:divider="@null"
+                android:listSelector="@null"
+                android:scrollbars="none"
+                android:visibility="invisible"></ListView>
+
+            <ListView
+                android:id="@+id/lv_sortingtwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:divider="@null"
+                android:listSelector="@null"
+                android:scrollbars="none"
+                android:visibility="invisible"></ListView>
+        </LinearLayout>-->
+    </RelativeLayout>
+
+</LinearLayout>

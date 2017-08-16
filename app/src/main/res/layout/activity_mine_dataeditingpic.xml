@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <!-- 头部导航 -->
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_layout_higher" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dip"
+        android:background="@color/white" />
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_08" />
+    <!-- 个人照片 -->
+
+
+    <!-- <com.game.helper.view.pdgrid.PagedDragDropGrid -->
+    <!-- android:id="@+id/photo_gridview" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="360dp" -->
+    <!-- android:layout_gravity="left|top" -->
+    <!-- android:layout_marginBottom="10dp" -->
+    <!-- android:background="@color/white" -->
+    <!-- android:horizontalSpacing="0.0dip" -->
+    <!-- android:paddingLeft="0dp" -->
+    <!-- android:paddingRight="0dp" -->
+    <!-- android:paddingTop="0dp" -->
+    <!-- android:scrollbars="none" -->
+    <!-- android:verticalSpacing="0dip" > -->
+    <!-- </com.game.helper.view.pdgrid.PagedDragDropGrid> -->
+
+    <com.game.helper.draggridview.DragGridView
+        android:id="@+id/photo_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/white"
+        android:cacheColorHint="@android:color/transparent"
+        android:gravity="left|top"
+        android:horizontalSpacing="0dip"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="0dip" >
+    </com.game.helper.draggridview.DragGridView>
+
+</LinearLayout>

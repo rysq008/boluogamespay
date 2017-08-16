@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\refreshing.png",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\refreshing.png"
+    },
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\refresh_succeed.png",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\refresh_succeed.png"
+    },
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\pull_icon_big.png",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\pull_icon_big.png"
+    },
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\xlistview_arrow.png",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\xlistview_arrow.png"
+    },
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\image.png",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\image.png"
+    },
+    {
+        "merged": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\refresh_failed.png",
+        "source": "F:\\workplace\\G9_game\\bbxpc_android_lib_MyListView\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\refresh_failed.png"
+    }
+]

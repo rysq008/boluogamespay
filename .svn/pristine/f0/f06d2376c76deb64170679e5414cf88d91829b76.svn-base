@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="151dp"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@drawable/gh_white_to_bgcolor_selector"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/iv_item1"
+            android:layout_width="53.0dip"
+            android:layout_height="53.0dip"
+
+            android:layout_marginTop="10dp" >
+
+            <com.game.helper.view.widget.XCRoundImageViewByXfermode
+                android:id="@+id/iv_item"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/white"
+                android:scaleType="fitXY"
+                android:src="@drawable/preview_card_pic_loading" />
+
+            <LinearLayout
+                android:id="@+id/mLinear_dz"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:background="@drawable/dzs"
+                android:gravity="center"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/tv_dz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="5折"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_item"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+          
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            android:text="daasads"
+            android:textColor="@color/gh_shenhui_color"
+            android:textSize="12.0sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/item_mLinearMsg1"
+            android:layout_width="fill_parent"
+            android:layout_height="18dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/down_txt_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/gh_shenhui_color"
+                android:textSize="10.0sp" />
+
+            <TextView
+                android:id="@+id/down_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:visibility="gone"
+                android:text="0%"
+                android:textColor="@color/gh_shenhui_color"
+                android:textSize="10.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/item_mLinear"
+            android:layout_width="fill_parent"
+            android:layout_height="24dp"
+           
+            android:layout_marginTop="3.0dip"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/item_mLinearMsg"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/gh_shenhui_color"
+                    android:textSize="12.0sp" />
+
+                <TextView
+                    android:id="@+id/tv_datasize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/gh_shenhui_color"
+                    android:textSize="12.0sp" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pb_update_progress"
+                style="@style/ProgressBar_Mini"
+                android:layout_width="fill_parent"
+                android:layout_height="6dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:max="100" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_download"
+            android:layout_width="51dp"
+            android:layout_height="28dp"
+          
+            android:layout_gravity="center"
+            android:layout_marginTop="3.0dip"
+            android:background="@drawable/gh_line1_bg_shape_5"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="下载"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>

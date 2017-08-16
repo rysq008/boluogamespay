@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0.0dip"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10.0dip"
+        android:background="@drawable/gh_white_to_bgcolor_line_selector"
+        >
+
+        <ImageView
+            android:id="@+id/iv_item"
+            android:layout_width="fill_parent"
+            android:layout_height="110dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DIMEN_5DP"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLength="19"
+                android:maxLines="1"
+                android:text="xx"
+                android:textColor="@color/gh_shenhui_color"
+                android:textSize="16.0sp" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:paddingTop="10dp"
+            android:text="HIFI高音质，还原真音"
+            android:textColor="@color/gh_qianhui_color"
+            android:textSize="12.0sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_money"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingRight="10dp"
+                    android:text="xx金币"
+                    android:textColor="@color/red"
+                    android:textSize="16.0sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_mall_goods_yuanjia_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/DIMEN_20DP"
+                android:text="0000元"
+                android:textColor="@color/gh_qianhui_color"
+                android:textSize="14sp" />
+
+            <!--<TextView
+               android:id="@+id/tv_goodType"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:background="@drawable/gh_fense_bg_shape_5"
+               android:gravity="center"
+               android:paddingBottom="6dp"
+               android:paddingLeft="10dp"
+               android:paddingRight="10dp"
+               android:paddingTop="6dp"
+               android:singleLine="true"
+               android:textColor="@color/white"
+               android:textSize="13sp" />-->
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

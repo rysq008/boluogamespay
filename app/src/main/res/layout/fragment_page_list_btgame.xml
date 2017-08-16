@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line"
+    tools:context="com.game.helper.fragment.home.HomePageListNewGameFragment">
+
+    <com.jingchen.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/game_classify_refresh_view_btgame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_sortingdirectory"
+        android:background="@color/line">
+
+        <include
+            layout="@layout/refresh_head_r"
+            android:visibility="gone" />
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.jingchen.pulltorefresh.pullableview.PullableScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <ListView
+                    android:id="@+id/home_fragment_pagelist_btgame_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@color/transparent"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:fadingEdge="none"
+                    android:gravity="center"
+                    android:listSelector="@color/transparent"
+                    android:scrollbars="none"/>
+            </LinearLayout>
+        </com.jingchen.pulltorefresh.pullableview.PullableScrollView>
+
+        <include layout="@layout/load_more_r" />
+    </com.jingchen.pulltorefresh.PullToRefreshLayout>
+
+    <include
+        layout="@layout/nodate_img"
+        />
+</FrameLayout>

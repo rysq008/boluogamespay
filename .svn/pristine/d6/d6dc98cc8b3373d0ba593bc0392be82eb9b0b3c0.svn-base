@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="80dp"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/gh_qianhui_color" />
+
+    <LinearLayout
+        android:id="@+id/mLinearClick"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gh_white_to_bgcolor_selector"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginLeft="10dp">
+
+                <com.game.helper.view.widget.XCRoundImageViewByXfermode
+                    android:id="@+id/iv_item"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/white"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/preview_card_pic_loading" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- <RelativeLayout -->
+                    <!-- android:id="@+id/iv_logo" -->
+                    <!-- android:layout_width="wrap_content" -->
+                    <!-- android:layout_height="wrap_content" -->
+                    <!-- android:layout_marginRight="10dp" -->
+                    <!-- android:background="@drawable/shouye_zhekou" > -->
+
+
+                    <!-- <TextView -->
+                    <!-- android:id="@+id/tv_logo" -->
+                    <!-- android:layout_width="wrap_content" -->
+                    <!-- android:layout_height="wrap_content" -->
+                    <!-- android:layout_centerInParent="true" -->
+                    <!-- android:gravity="center" -->
+                    <!-- android:paddingBottom="2dp" -->
+                    <!-- android:paddingLeft="6dp" -->
+                    <!-- android:paddingRight="6dp" -->
+                    <!-- android:paddingTop="2dp" -->
+                    <!-- android:text="4.3折" -->
+                    <!-- android:textColor="@color/white" -->
+                    <!-- android:textSize="10sp" /> -->
+                    <!-- </RelativeLayout> -->
+
+                    <TextView
+                        android:id="@+id/tv_item"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="欢乐斗地主"
+                        android:textColor="@color/gh_shenhui_color"
+                        android:textSize="16.0sp" />
+
+                    <LinearLayout
+                        android:id="@+id/mLinear_dz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:background="@drawable/dzs"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_dz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="5折"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_first"
+                        android:layout_width="30dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/gh_line1_line_shape_5"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="首充"
+                        android:textColor="@color/light_blue"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_gift"
+                        android:layout_width="30dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/gh_line1_line_shape_5"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="礼包"
+                        android:textColor="@color/light_blue"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_first3"
+                        android:layout_width="30dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/gh_line1_line_shape_5"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="首充"
+                        android:textColor="@color/light_blue"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/item_mLinearMsg"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="0.0dip"
+                            android:gravity="center_vertical|left"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_type"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="一句"
+                                android:textColor="@color/gh_shenhui_color"
+                                android:textSize="12.0sp" />
+
+                            <TextView
+                                android:id="@+id/tv_datasize"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="25.2M"
+                                android:textColor="@color/gh_shenhui_color"
+                                android:textSize="12.0sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_msg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0.0dip"
+                                android:ellipsize="end"
+                                android:gravity="center_vertical"
+                                android:maxLines="1"
+                                android:text="客户端:"
+                                android:textColor="@color/gh_qianhui_color"
+                                android:textSize="14.0sp" />
+
+                            <TextView
+                                android:id="@+id/game_detail_frome_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="平台"
+                                android:textColor="@color/light_blue"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mLinear_progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ProgressBar
+                            android:id="@+id/pb_update_progress"
+                            style="@style/ProgressBar_Mini"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="0.0dip"
+                            android:layout_weight="1"
+                            android:max="100"
+                            android:paddingBottom="7dp"
+                            android:paddingTop="7dp"
+                            android:progress="0" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="0.0dip"
+                            android:gravity="center_vertical|left"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/down_txt_pb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:textColor="@color/gh_qianhui_color"
+                                android:textSize="12.0sp" />
+
+                            <TextView
+                                android:id="@+id/down_progress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="0dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="0%"
+                                android:textColor="@color/gh_qianhui_color"
+                                android:textSize="12.0sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/tv_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/apk_state"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

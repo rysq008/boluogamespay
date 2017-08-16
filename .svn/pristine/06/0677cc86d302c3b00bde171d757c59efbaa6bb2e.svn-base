@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+     android:descendantFocusability="beforeDescendants"
+    android:orientation="vertical" >
+
+    <com.jingchen.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <include layout="@layout/refresh_head_r" />
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.jingchen.pulltorefresh.pullableview.PullableScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <com.game.helper.view.widget.ListViewForScrollView
+                    android:id="@+id/listView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/white"
+                    android:cacheColorHint="@color/white"
+                    android:divider="@null"
+                    android:gravity="center"
+                    android:scrollbars="none" >
+                </com.game.helper.view.widget.ListViewForScrollView>
+            </LinearLayout>
+        </com.jingchen.pulltorefresh.pullableview.PullableScrollView>
+
+        <include layout="@layout/load_more_r" />
+    </com.jingchen.pulltorefresh.PullToRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/mLinear_seting_comment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/gh_qianhui_color" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/et_comment"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="说些什么呗..."
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/gh_shenhui_color"
+                android:textColorHint="@color/gh_qianhui_color"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/tv_setcomment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/shouye_243" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
