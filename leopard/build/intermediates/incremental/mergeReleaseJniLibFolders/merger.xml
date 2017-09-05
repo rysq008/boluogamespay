@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="F:\workplace\G9_game\leopard\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="F:\workplace\G9_game\leopard\src\release\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\zr\AndroidStudioProjects\boluogamespay\leopard\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="C:\Users\zr\AndroidStudioProjects\boluogamespay\leopard\src\release\jniLibs"/></dataSet></merger>

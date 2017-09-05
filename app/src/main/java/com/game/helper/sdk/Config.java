@@ -15,7 +15,7 @@ public class Config {
 	 * 1  测试环境
 	 * 2  开发环境
 	 */
-	public static int Env=1;
+	public static int Env=0;
 	
 	public static Config getInstance() {
 		if (ins == null) {

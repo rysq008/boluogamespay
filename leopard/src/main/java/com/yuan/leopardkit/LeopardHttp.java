@@ -92,7 +92,7 @@ public class LeopardHttp {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static DownloadInfo DWONLOAD(final DownloadInfo downloadInfo, final IProgress iProgress, final Context mContext) {
-
+        tmp_progress = 0;
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
