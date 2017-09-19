@@ -350,7 +350,7 @@ public class Util {
 	 */
 	public static Bitmap readBitmap(final String path) {
 		try {
-			FileInputStream stream = new FileInputStream(new File(path + "test.jpg"));
+			FileInputStream stream = new FileInputStream(new File(path + "DESUtil.jpg"));
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inSampleSize = 8;
 			opts.inPurgeable = true;

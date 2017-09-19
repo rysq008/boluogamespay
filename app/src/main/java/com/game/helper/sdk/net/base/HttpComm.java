@@ -3,15 +3,15 @@ package com.game.helper.sdk.net.base;
 import com.game.helper.sdk.Config;
 /**
  * @Description
- * @Path 
- * @Author 
+ * @Path
+ * @Author
  * @Date 2016年8月23日 上午11:49:59
- * @Company 
+ * @Company
  */
 public interface HttpComm {
 
 	String BASE_URL=Config.getInstance().BASE_URL;
-	
+
 	//-----------------------------------------------------------------------------------------------------------------------------------//
 
 	/** 获取验证码接口 */
@@ -23,7 +23,7 @@ public interface HttpComm {
 	/** 用户注册接口 */
 	String API_register_Url =  "/tuser/register";
 	/**用户登录接口 */
-	String API_login_Url =  "/tuser/login";
+	String API_login_Url =  "/member/login/";
 	/**忘记密码/重置密码 */
 	String API_resetPwd_Url =  "/tuser/resetPwd";
 	/**修改密码接口 */
@@ -48,7 +48,7 @@ public interface HttpComm {
 	String API_saveExchange_Url =  "/cgoodexchange/saveExchange";
 	/**获取兑换记录 */
 	String API_getExchangelist_Url =  "/cgoodexchange/getExchangelist";
-	
+
 	/**抽奖摇一摇 */
 	String API_getLottery_Url =  "/cgood/getLottery";
 	/**社区摇一摇 */
@@ -136,7 +136,7 @@ public interface HttpComm {
 	String API_deleteAddress_Url =  "/caddress/deleteAddress";
 	/**是否关注*/
 	String API_judgeFocus_Url =  "/cfocus/judgeFocus";
-	
+
 	/**获取客服列表*/
 	String API_getContactList_Url =  "/ccontact/getContactList";
 	/**获取游戏礼包列表*/
@@ -165,7 +165,7 @@ public interface HttpComm {
 	String API_getGift_Url =  "/cgamegift/getGift";
 	/** 首页获取活动公告*/
 	String API_getInfoAct_Url =  "/tinfocontent/getInfoAct";
-	
+
 	/** 游戏攻略-保存攻略*/
 	String API_saveGameCut_Url =  "/cgamecut/saveGameCut";//
 	/** 游戏攻略-点赞，差劲，收藏，分享，评论接口*/
@@ -180,9 +180,9 @@ public interface HttpComm {
 	String API_queryGamePl_Url =  "/cgamepl/queryGamePl";//
 	/**游戏评论-点赞:游戏评论*/
 	String API_dzGamePl_Url =  "/cgamepl/dzGamePl";//
-	
-	
-	
+
+
+
 	/**获取用户最新的金币*/
 	String API_queryPtb_Url =  "/tuser/queryPtb";//
 	/**根据Id获取游戏*/
@@ -195,8 +195,8 @@ public interface HttpComm {
 	String API_getHotGame_Url =  "/cgame/getHotGame";
 	/**网游榜*/
 	String API_getNetGame_Url =  "/cgame/getNetGame";
-	
-	
+
+
 	/**获取文章*/
 	String API_getBasic_Url =  "/cbasic/getBasic";
 	/**获取问题列表*/
@@ -215,7 +215,7 @@ public interface HttpComm {
 	String API_getCard_Url =  "/ccard/getCard";
 	/**获取我的首充卡*/
 	String API_queryMyCard_Url =  "/ccard/queryMyCard";
-	
+
 	/**移动头像接口*/
 	String API_changeIconOrderby_Url =  "/tuser/changeIconOrderby";//
 	/**获取用户头像接口*/
@@ -246,7 +246,7 @@ public interface HttpComm {
 	String API_queryGameByHotWord_Url =  "/cgame/queryGameByHotWord";
 	/**我的礼包接口*/
 	String API_queryMyGift_Url =  "/cgamegift/queryMyGift";
-	
+
 	/**游戏充值接口*/
 	String API_createGameOrder_Url =  "/cgameorder/createGameOrder";
 	/**充值金币下订单接口*/
@@ -263,13 +263,13 @@ public interface HttpComm {
 	String API_starUser_Url =  "/tuser/starUser";
 	/**我的收入或者我的支出*/
 	String API_getTradeList_Url =  "/ctrade/getTradeList";
-	
+
 	/**获取订单详情*/
 	String API_getOrderByNo_Url =  "/cgameorder/getOrderByNo";
 	/**获取个人主页信息*/
 	String API_getMainPageInfo_Url =  "/tuser/getMainPageInfo";
-	
-	
+
+
 	/**获取我的平台签到记录*/
 	String API_getPlatformSign_Url =  "/cplatformsign/getPlatformSign";
 	/**判断是否平台签到*/
@@ -280,18 +280,18 @@ public interface HttpComm {
 	String API_saveWithdraw_Url =  "/cwithdraw/saveWithdraw";
 	/**允许提现的金额*/
 	String API_allowTxMoney_Url =  "/cwithdraw/allowTxMoney";
-	
+
 	/**判断领折扣号按钮是否置灰*/
 	String API_isGetMoreThanThree_Url =  "/cplataccount/isGetMoreThanThree";
 	/**游戏账号是否允许首充*/
 	String API_isAccountAllowSc_Url =  "/cplataccount/isAccountAllowSc";
-	
+
 	/**绑定折扣号*/
 	String API_addMyZkh_Url =  "/cplataccount/addMyZkh";
 	/**获取我的折扣号*/
 	String API_queryMyZkh_Url =  "/cplataccount/queryMyZkh";
-	
-	
+
+
 	/**获取我的反馈问题*/
 	String API_getfeedBack_Url =  "/cfeedback/getFeedBack";
 	/**获取我的提现记录*/
@@ -302,18 +302,18 @@ public interface HttpComm {
 	String API_version_check_Url =  "/cversion/version_check";
 	/**分享资讯新增金币*/
 	String API_insertShare_Url =  "/cshare/insertShare";
-	
+
 	/**获取滚动广告*/
 	String API_crollList_Url =  "/croll/list";
 
 	/**客户端列表*/
 	String API_fromlist="/cgameplat/list";
 
-    /**根据客户端查询游戏*/
-    String API_queryGameByPlatId="/cgame/queryGameByPlatId";
+	/**根据客户端查询游戏*/
+	String API_queryGameByPlatId="/cgame/queryGameByPlatId";
 
 	/**删除游戏订单*/
-    String API_delGameOrderByNo="/cgameorder/delGameOrderByNo";
+	String API_delGameOrderByNo="/cgameorder/delGameOrderByNo";
 
 	/**查询游戏的首充续充*/
 	String API_findGameDisCount="/cgame/findGameDisCount";

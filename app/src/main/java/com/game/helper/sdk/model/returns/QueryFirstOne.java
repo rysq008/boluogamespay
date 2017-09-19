@@ -17,8 +17,8 @@ public class QueryFirstOne {
 	         {
 	             "createTimeString": "2016-10-01 12:12:12",
 	             "themeName": "主题1",
-	             "pic": "test.jpg",
-	             "picThumb": "test.jpg",
+	             "pic": "DESUtil.jpg",
+	             "picThumb": "DESUtil.jpg",
 	             "gameNum": 5,
 	             "themeId": 1,
 	             "remark": "备注"

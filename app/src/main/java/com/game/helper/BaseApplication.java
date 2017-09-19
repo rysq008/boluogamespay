@@ -100,6 +100,8 @@ public class BaseApplication extends MultiDexApplication implements CommValues, 
     @Override
     public void onCreate() {
         super.onCreate();
+//        com.game.helper.sdk.Config.getInstance().setHost(this,"");
+
         mMainLooper = getMainLooper();
         mInstance = this;
         context = this;
