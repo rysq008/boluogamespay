@@ -252,8 +252,8 @@ public class LoginActivity extends BaseActivity implements Handler.Callback, Pla
     }
 
     @Override
-    @OnClick({R.id.btn_login, R.id.btn_forgetPwd, R.id.btn_register,R.id.auth_btn_send_auth,
-            R.id.login_auth_btn, R.id.auth_login_usepwd_btn,/* R.id.tv_isRight, */R.id.delete,R.id.auth_btn_login,
+    @OnClick({R.id.btn_login, R.id.btn_forgetPwd, R.id.btn_register, R.id.auth_btn_send_auth,
+            R.id.login_auth_btn, R.id.auth_login_usepwd_btn,/* R.id.tv_isRight, */R.id.delete, R.id.auth_btn_login,
             R.id.login_logo_iv, R.id.login_back_iv})
     public void onClick(View v) {
         switch (v.getId()) {

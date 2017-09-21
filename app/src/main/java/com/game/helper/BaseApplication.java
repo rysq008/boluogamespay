@@ -106,7 +106,7 @@ public class BaseApplication extends MultiDexApplication implements CommValues, 
         mInstance = this;
         context = this;
         /*if (mTencent == null) {
-		        mTencent = Tencent.createInstance(mAppid, this);
+                mTencent = Tencent.createInstance(mAppid, this);
 		}*/
         initImageLoader(this);
         initLocation();
@@ -122,6 +122,7 @@ public class BaseApplication extends MultiDexApplication implements CommValues, 
         MobclickAgent.setDebugMode(true);
         MobclickAgent.openActivityDurationTrack(false);
         //MobclickAgent.updateOnlineConfig(this);
+        SharedPreUtil.init(this);
 
         // 设置输出运行时日志
         // UMGameAgent.setDebugMode(true);

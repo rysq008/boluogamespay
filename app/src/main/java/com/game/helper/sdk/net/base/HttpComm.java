@@ -328,6 +328,7 @@ public interface HttpComm {
 
 
 
+	String SESSION_ID = "sessionid";
 	String ACCEPT_ENCODING = "Accept-Encoding";
 	String GZIP = "gzip";
 	String AUTH_SECRET = "";

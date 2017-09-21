@@ -35,29 +35,31 @@ public class Config {
     public String IP = "http://60.205.204.218:8000"/*"http://192.168.1.98:8000"*/;
 
     public void setHost(Context ct, String url) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ct);
-        String host = sp.getString("HOST", url);
-        if (!TextUtils.isEmpty(url)) {
-            sp.edit().putString("HOST", url).commit();
-        } else {
-            if (TextUtils.isEmpty(host)) {
-                host = IP;
-                sp.edit().putString("HOST", IP).commit();
-            }
-            url = host;
-        }
-//		Toast.makeText(ct, url, 0).show();
-        IP = url;
-        BASE_URL = IP /*+ "/helper/srTrustee/apidev.do"*/;
-        Toast.makeText(ct, "setHost------->" + BASE_URL, Toast.LENGTH_LONG).show();
+//        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ct);
+//        String host = sp.getString("HOST", url);
+//        if (!TextUtils.isEmpty(url)) {
+//            sp.edit().putString("HOST", url).commit();
+//        } else {
+//            if (TextUtils.isEmpty(host)) {
+//                host = IP;
+//                sp.edit().putString("HOST", IP).commit();
+//            }
+//            url = host;
+//        }
+////		Toast.makeText(ct, url, 0).show();
+//        IP = url;
+//        BASE_URL = IP /*+ "/helper/srTrustee/apidev.do"*/;
+//        Toast.makeText(ct, "setHost------->" + BASE_URL, Toast.LENGTH_LONG).show();
     }
 
     public Config() {
         switch (Env) {
             //正式环境
             case 0:
-//			IP="http://ghelper.h5h5h5.cn";
-                BASE_URL = IP/*+"/helper/srTrustee/apidev.do"*/;
+			IP="http://ghelper.h5h5h5.cn";
+                BASE_URL = IP+"/helper/srTrustee/apidev.do";
+//                BASE_URL = IP/*+"/helper/srTrustee/apidev.do"*/;
+
                 break;
             //测试环境
             case 1:

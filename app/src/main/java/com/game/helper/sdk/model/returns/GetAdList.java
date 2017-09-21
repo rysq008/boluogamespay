@@ -9,10 +9,10 @@ import java.util.List;
  * @Path com.game.helper.sdk.model.returns.GetAdList.java
  * @Author lbb
  * @Date 2016年9月12日 下午7:41:54
- * @Company 
+ * @Company
  */
 public class GetAdList {
-	/*"data": [
+    /*"data": [
 	         {
 	             "content": null,
 	             "field1": "http: //godbless.h5h5h5.cn/helper/tadvertisement/toBannerContentPage?adId=19",
@@ -59,24 +59,22 @@ public class GetAdList {
     },
 	 */
 
-	
-	public List<AppContent> data;
-	public class AdData{
-		public String gameId;
-		public String content;
-		public String field1;
-		public String field2;
-		public String field3;
-		public int adId;
-		public String baseAcessPath;
-		public String adImg;
-		public String imgRemark;
-		public String isRedirct;
-		public String outUrl;
-		public String orderby;
-		public String updateTimeString;
 
+    public List<AppContent> data;
 
-		
-	}
+    public class AdData {
+        public String gameId;
+        public String content;
+        public String field1;
+        public String field2;
+        public String field3;
+        public int adId;
+        public String baseAcessPath;
+        public String adImg;
+        public String imgRemark;
+        public String isRedirct;
+        public String outUrl;
+        public String orderby;
+        public String updateTimeString;
+    }
 }

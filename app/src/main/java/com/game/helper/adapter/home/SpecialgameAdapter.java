@@ -4,6 +4,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -17,6 +18,7 @@ import com.game.helper.activity.WebActivity;
 import com.game.helper.activity.home.GameDetailActivity;
 import com.game.helper.db.manager.DBManager;
 import com.game.helper.download.bean.AppContent;
+import com.game.helper.download.model.DownloadController;
 import com.game.helper.installPackage.MonitorSysReceiver;
 import com.game.helper.leopardkit.DownLoadModel;
 import com.game.helper.net.base.BaseBBXTask.Back;
@@ -24,6 +26,7 @@ import com.game.helper.net.task.DownloadFinishTask;
 import com.game.helper.sdk.model.returns.LoginData;
 import com.game.helper.util.ToastUtil;
 import com.game.helper.view.widget.XCRoundImageViewByXfermode;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yuan.leopardkit.LeopardHttp;
 import com.yuan.leopardkit.db.HttpDbUtil;
 import com.yuan.leopardkit.download.DownLoadManager;
@@ -36,11 +39,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,9 +58,23 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import de.greenrobot.event.EventBus;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
+import zlc.season.rxdownload2.RxDownload;
+import zlc.season.rxdownload2.entity.DownloadBean;
+import zlc.season.rxdownload2.entity.DownloadEvent;
+import zlc.season.rxdownload2.entity.DownloadFlag;
+import zlc.season.rxdownload2.entity.DownloadStatus;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static zlc.season.rxdownload2.function.Utils.log;
 
 /**
  * @Description
@@ -231,18 +250,12 @@ public class SpecialgameAdapter extends BaseAdapter {
         DownloadInfo info;
         private boolean ifhavetast;
 
-        Handler handler = new Handler() {
+        private DownloadController mDownloadController;
+        private RxDownload mRxDownload;
+        private int flag;
 
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 0x333:
-                        Bundle bundle = msg.getData();
-                        doDowlod(bundle.getInt("postion", 0));
-                        break;
-                }
-            }
-        };
         private AppContent mAppContent;
+        private DownloadBean downloadBean;
 
         public ViewHolder(View view) {
             super();
@@ -265,16 +278,37 @@ public class SpecialgameAdapter extends BaseAdapter {
             progressShow = (TextView) view.findViewById(R.id.down_progress);
 
             tv_download = (Button) view.findViewById(R.id.tv_download);
+            tv_download.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDownloadController.handleClick(new DownloadController.Callback() {
+                        @Override
+                        public void startDownload() {
+                            start();
+                        }
+
+                        @Override
+                        public void pauseDownload() {
+                            pause();
+                        }
+
+                        @Override
+                        public void install() {
+                            installApk();
+                        }
+                    });
+                }
+            });
             game_detail_frome_tv = (TextView) view.findViewById(R.id.game_detail_frome_tv);
-            /*ButterKnife.bind(this, view);
-            mView=view;
-			mView.setTag(this);*/
 
+            mRxDownload = RxDownload.getInstance(mContext);
 
+            mDownloadController = new DownloadController(new TextView(mContext), tv_download);
         }
 
         @SuppressWarnings("unchecked")
         public void setData(DownLoadModel mDownLoadModel, final DownloadInfo info, final Integer postion) {
+            model = mDownLoadModel;
             if (mDownLoadModel != null) {
                 this.info = info;
                 Log.e("lbb", "-----setData-------");
@@ -296,19 +330,9 @@ public class SpecialgameAdapter extends BaseAdapter {
                             this.view.setImageDrawable(resource.getCurrent());
                         }
                     };
-                    Glide
-                            .with(BaseApplication.mInstance.context.getApplicationContext()) // safer!
-                            .load("" + mAppContent.fileAskPath + mAppContent.logo)
-                            .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                            .into(viewTarget);
-					/*Glide.with(BaseApplication.mInstance.context.getApplicationContext())
-					.load(""+mAppContent.fileAskPath+mAppContent.logo)
-					.diskCacheStrategy(DiskCacheStrategy.SOURCE)
-					//.centerCrop()// 长的一边撑满
-					//.placeholder(R.drawable.preview_card_pic_loading)//加载中显示的图片  
-					.error(R.drawable.preview_card_pic_loading)//加载失败时显示的图片
-					//.crossFade()
-					.into(iv_item);*/
+                    Glide.with(BaseApplication.mInstance.context.getApplicationContext()) // safer!
+                            .load("" + mAppContent.fileAskPath + mAppContent.logo).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(viewTarget);
+
                     tv_item.setText(mAppContent.gameName);
                     tv_type.setText(mAppContent.kindName);
                     if (!TextUtils.isEmpty(mAppContent.fileSize)) {
@@ -323,7 +347,6 @@ public class SpecialgameAdapter extends BaseAdapter {
                     if ((!TextUtils.isEmpty(mAppContent.typeId) && mAppContent.typeId.equals("3"))
                             || (!TextUtils.isEmpty(mAppContent.typeName) && mAppContent.typeName.equals("H5游戏"))) {
                         //tv_download.setText("打开");
-                        setDowState(DownLoadManager.AlreadyInstalled);
                         tv_download.setOnClickListener(new OnClickListener() {
 
                             @Override
@@ -337,436 +360,113 @@ public class SpecialgameAdapter extends BaseAdapter {
                         return;
                     }
                 }
-                setByStatus(info.getState());
 
-                if (info.getFileLength() != 0) {
-                    pb_update_progress.setMax((int) info.getFileLength());
-                    pb_update_progress.setProgress((int) info.getProgress());
-                    progressShow.setText((int) ((float) info.getProgress() / info.getFileLength() * 100) + "%");
-                    if (info.getState() == DownLoadManager.STATE_FINISH) {
-                        if (((int) ((float) info.getProgress() / info.getFileLength() * 100)) == 100) {
+                downloadBean = new DownloadBean
+                        .Builder(model.getmAppContent().downloadPath)
+                        .setSaveName(null)      //not need.
+                        .setSavePath(null)      //not need
+                        .setExtra1(model.getmAppContent().packageName)   //save extra info into database.
+                        .setExtra2(model.getmAppContent().gameId)  //save extra info into database.
+                        .build();
 
-                            //tv_download.setText("安装");
-                            setDowState(DownLoadManager.AlreadyInstalled);
-                        } else {
-                            //tv_download.setText("下载");
-                            info.setState(DownLoadManager.STATE_WAITING);
-                            setByStatus(DownLoadManager.STATE_WAITING);
-                            setDowState(DownLoadManager.STATE_WAITING);
-                            if (info.getDownLoadTask() == null) {
-                                DownloadInfo mDownloadInfo = DownLoadManager.getManager().getDownloadInfo(info);
-                                if (mDownloadInfo != null) {
-                                    info.setDownLoadTask(mDownloadInfo.getDownLoadTask());
-                                    info.getDownLoadTask().setState(DownLoadManager.STATE_WAITING);
-                                }
-                            } else {
-                                info.getDownLoadTask().setState(DownLoadManager.STATE_WAITING);
-                            }
-                            //	info.getDownLoadTask().pause();
-                        }
-                    }
-                    double curP = 0;
-                    double curTotal = 0;
-                    long progress = info.getProgress();
-                    long total = info.getFileLength();
-                    if (progress / 1024L < 1024L) {
-                        curP = (double) progress / 1024;
-                        curTotal = (double) total / 1024L / 1024L;
-                        prgressTv.setText(Double.toString(getRealNum(curP)) + "KB/" + Double.toString(getRealNum(curTotal)) + "MB"
-                        );
-                    } else {
-                        curP = (double) progress / 1024L / 1024L;
-                        curTotal = (double) total / 1024L / 1024L;
-                        prgressTv.setText(Double.toString(getRealNum(curP)) + "MB/" + Double.toString(getRealNum(curTotal)) + "MB"
-                        );
-                    }
-					/*prgressTv.setText(Double.toString(getRealNum(info.getProgress()/1024/1024)) + "MB/"
-								+ Double.toString(getRealNum( info.getFileLength()/1024/1024)) + "MB"+"");*/
-                } else {
-                    pb_update_progress.setMax((int) 0);
-                    pb_update_progress.setProgress((int) 100);
-                    progressShow.setText(0 + "%");
-                }
-                if (info.getState() == DownLoadManager.STATE_WAITING) {
-                    //tv_download.setText("下载");
-                    setDowState(DownLoadManager.STATE_WAITING);
-                    if (MonitorSysReceiver.checkApkExist(mContext, mAppContent.packageName, mAppContent.gameId)) {
-                        //tv_download.setText("打开");
-                        info.setState(DownLoadManager.AlreadyInstalled);
-                        setByStatus(DownLoadManager.AlreadyInstalled);
-                        setDowState(DownLoadManager.AlreadyInstalled);
-                    }
-                }
-                if (info.getState() == DownLoadManager.STATE_PAUSE) {
-                    //tv_download.setText("继续");
-                    setDowState(DownLoadManager.STATE_PAUSE);
-                }
-                if (info.getState() == DownLoadManager.STATE_DOWNLOADING) {
-                    //tv_download.setText("暂停");
-                    setDowState(DownLoadManager.STATE_DOWNLOADING);
-                }
-                if (info.getState() == DownLoadManager.STATE_ERROR) {
-                    //tv_download.setText("等待");
-                    setDowState(DownLoadManager.STATE_ERROR);
-                }
-                if (info.getState() == DownLoadManager.AlreadyInstalled) {
-                    //tv_download.setText("打开");
-                    setDowState(DownLoadManager.AlreadyInstalled);
-                }
-                tv_download.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-
-                        switch (event.getAction()) {
-                            case MotionEvent.ACTION_DOWN:
-                                //Log.e(TGA, "Item_ACTION_DOWN");
-                               /* if (DownLoadManager.getManager().isDowLoading(info)){//有下载中的任务,并且点击的不是下载总的
-                                    ToastUtil.showToast(mContext,"已有游戏在下载中 请稍后...");
-                                    return false;
-                                }else{*/
-                                    new Thread(){
-                                        @Override
-                                        public void run() {
-                                            Message msg=new Message();
-                                            msg.what=0x333;
-                                            Bundle bundle = new Bundle();
-                                            bundle.putInt("postion", postion);
-                                            msg.setData(bundle);
-                                            handler.sendMessage(msg);
-                                        }
-                                    }.start();
-                                  // doDowlod(postion);
-                               //}
-                                break;
-                        }
-                        return false;
-                    }
-                });
-
-               /* tv_download.setOnClickListener(new OnClickListener() {
-
-                    public void onClick(View v)
-                });*/
-
-                //	pb_update_progress.setProgress(mAppContent.downloadPercent);
-                //	setIconByStatus(tv_download, mAppContent.status);
-            }
-        }
-
-        private void doDowlod(final int postion) {
-
-            BaseApplication.mInstance.isRecommendBoutiqueAdapter = 3;
-            DBManager.getInstance(mContext).insertDownloadFile(mAppContent);
-            if (info.getDownLoadTask() == null && (DownLoadManager.getManager().isHaved(info) == false || DownLoadManager.getManager().getDownloadInfo(info) == null)) {
-                //add task
-                LeopardHttp.DWONLOAD(info, new IProgress() {
-
-                    private double curTotal;
-                    private double curP;
-                    private DownLoadModel mDown;
-
-                    @SuppressLint("NewApi")
-                    @Override
-                    public void onProgress(long progress, long total, boolean done) {
-                        //if(progress>0){
-                        DownloadInfo infos = info.getDownLoadTask().getDownloadInfo();
-                        mDown = new DownLoadModel();
-                        mDown.setmAppContent(mAppContent);
-                        mDown.setInfo(infos);
-                        /*new Handler().postDelayed(new Runnable(){
-                            public void run() {
-                                EventBus.getDefault().post(mDown);
-                            }
-                        }, 5000);*/   //5秒
-                        EventBus.getDefault().post(mDown);
-                       /* pb_update_progress.setMax((int) info.getFileLength());
-                        pb_update_progress.setProgress((int) info.getProgress());
-
-                        if (progress / 1024L < 1024L) {
-                            curP = (double) progress / 1024;
-                            curTotal = (double) total / 1024L / 1024L;
-                            prgressTv.setText(Double.toString(getRealNum(curP)) + "KB/" + Double.toString(getRealNum(curTotal)) + "MB"
-                            );
-                        } else {
-                            curP = (double) progress / 1024L / 1024L;
-                            curTotal = (double) total / 1024L / 1024L;
-                            prgressTv.setText(Double.toString(getRealNum(curP)) + "MB/" + Double.toString(getRealNum(curTotal)) + "MB"
-                            );
-                        }*/
-                        progressShow.setText((int) ((float) info.getProgress() / info.getFileLength() * 100) + "%");
-
-                        if (done && ((int) ((float) progress / total * 100)) == 100) {
-                            LoginData user = DBManager.getInstance(mContext).getUserMessage();
-                            new DownloadFinishTask(mContext, user.userId, mAppContent.gameId, new Back() {
-
-                                @Override
-                                public void success(Object object, String msg) {
-                                    // TODO Auto-generated method stub
-
+//                Observable<DownloadEvent> replayDownloadStatus = mRxDownload.receiveDownloadStatus(model.getmAppContent().downloadPath).replay().autoConnect();
+//                Observable<DownloadEvent> sampled = replayDownloadStatus.filter(new Predicate<DownloadEvent>() {
+//                    @Override
+//                    public boolean test(@NonNull DownloadEvent downloadEvent) throws Exception {
+//                        return downloadEvent.getFlag() == DownloadFlag.STARTED;
+//                    }
+//                }).throttleFirst(200, TimeUnit.MILLISECONDS);
+//                Observable<DownloadEvent> noProgress = replayDownloadStatus.filter(new Predicate<DownloadEvent>() {
+//                    @Override
+//                    public boolean test(@NonNull DownloadEvent downloadEvent) throws Exception {
+//                        return downloadEvent.getFlag() != DownloadFlag.STARTED;
+//                    }
+//                });
+//                model.disposable = Observable.merge(sampled, noProgress).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<DownloadEvent>() {
+//                    @Override
+//                    public void accept(@NonNull DownloadEvent downloadEvent) throws Exception {
+//                        if (flag != downloadEvent.getFlag()) {
+//                            flag = downloadEvent.getFlag();
+//                            log("all events:" + downloadEvent.getFlag());
+//                        }
+//                        if (downloadEvent.getFlag() == DownloadFlag.FAILED) {
+//                            Throwable throwable = downloadEvent.getError();
+//                            Log.w("TAG", throwable);
+//                        }
+//                        mDownloadController.setEvent(downloadEvent);
+//                        updateProgressStatus(downloadEvent.getDownloadStatus());
+//                    }
+//                });
+                model.disposable = mRxDownload.receiveDownloadStatus(model.getmAppContent().downloadPath)
+                        .subscribe(new Consumer<DownloadEvent>() {
+                            @Override
+                            public void accept(DownloadEvent downloadEvent) throws Exception {
+                                if (flag != downloadEvent.getFlag()) {
+                                    flag = downloadEvent.getFlag();
+                                    log(flag + "");
                                 }
 
-                                @Override
-                                public void fail(String status, String msg, Object object) {
-                                    // TODO Auto-generated method stub
-
+                                if (downloadEvent.getFlag() == DownloadFlag.FAILED) {
+                                    Throwable throwable = downloadEvent.getError();
+                                    Log.w("TAG", throwable);
                                 }
-                            }).start();
-                            if (MonitorSysReceiver.checkApkExist(mContext, mAppContent.packageName, mAppContent.gameId)) {
+                                mDownloadController.setEvent(downloadEvent);
+                            }
+                        });
 
-                            } else {
 
-                                // 下载完成后弹出安装窗
-                                File file = new File(DownLoadManager.getManager().deFaultDir + infos.getFileName());
-                                Intent intentInstall = new Intent();
-                                intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intentInstall.setAction(Intent.ACTION_VIEW);
-                                intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                                mContext.startActivity(intentInstall);
+            }
+        }
+
+        private void updateProgressStatus(DownloadStatus status) {
+            pb_update_progress.setIndeterminate(status.isChunked);
+            pb_update_progress.setMax((int) status.getTotalSize());
+            pb_update_progress.setProgress((int) status.getDownloadSize());
+            progressShow.setText(status.getPercent());
+            prgressTv.setText(status.getFormatStatusString());
+        }
+
+        private void start() {
+            RxPermissions.getInstance(mContext)
+                    .request(WRITE_EXTERNAL_STORAGE)
+                    .doOnNext(new Consumer<Boolean>() {
+                        @Override
+                        public void accept(Boolean granted) throws Exception {
+                            if (!granted) {
+                                throw new RuntimeException("no permission");
                             }
                         }
-                    }
-                },mContext);
-            }
-            if (info.getDownLoadTask() == null) {
-                DownloadInfo mDownloadInfo = DownLoadManager.getManager().getDownloadInfo(info);
-                if (mDownloadInfo != null) {
-                    info.setDownLoadTask(mDownloadInfo.getDownLoadTask());
-                }
-            }
-
-            DownloadInfo infos = info.getDownLoadTask().getDownloadInfo();
-            //DownloadInfo info = data.get(Integer.valueOf(v.getTag().toString())).getInfo();
-            if (infos.getState() == DownLoadManager.STATE_FINISH) {
-                if (((int) ((float) infos.getProgress() / infos.getFileLength() * 100)) == 100) {
-                    //tv_download.setText("打开");
-                    info.setState(DownLoadManager.AlreadyInstalled);
-                    infos.setState(DownLoadManager.AlreadyInstalled);
-                    setByStatus(DownLoadManager.AlreadyInstalled);
-                    setDowState(DownLoadManager.AlreadyInstalled);
-                    if (infos.getDownLoadTask() == null) {
-                        DownloadInfo mDownloadInfo = DownLoadManager.getManager().getDownloadInfo(infos);
-                        if (mDownloadInfo != null) {
-                            infos.setDownLoadTask(mDownloadInfo.getDownLoadTask());
-                            infos.getDownLoadTask().setState(DownLoadManager.AlreadyInstalled);
-                        } else {
-                            HttpDbUtil.initHttpDB(mContext).update(infos);
+                    })
+                    .compose(mRxDownload.<Boolean>transformService(downloadBean))
+                    .subscribe(new Consumer<Object>() {
+                        @Override
+                        public void accept(Object o) throws Exception {
+                            Toast.makeText(mContext, "下载开始", Toast.LENGTH_SHORT).show();
                         }
+                    });
+        }
 
-                    } else {
-                        infos.getDownLoadTask().setState(DownLoadManager.AlreadyInstalled);
-                    }
-                    //infos.getDownLoadTask().reStart();
-                    if (MonitorSysReceiver.checkApkExist(mContext, mAppContent.packageName, mAppContent.gameId)) {
-                        PackageManager packageManager = mContext.getApplicationContext().getPackageManager();
-                        if (packageManager != null) {
-                            Intent intent = new Intent();
-                            intent = packageManager.getLaunchIntentForPackage(mAppContent.packageName);
-                            if (intent != null) {
-                                mContext.startActivity(intent);
-                            }
-                        }
-                    } else {
+        private void pause() {
+            mRxDownload.pauseServiceDownload(model.getmAppContent().downloadPath).subscribe();
+        }
 
-                        // 下载完成后弹出安装窗
-                        File file = new File(DownLoadManager.getManager().deFaultDir + infos.getFileName());
-                        Intent intentInstall = new Intent();
-                        intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intentInstall.setAction(Intent.ACTION_VIEW);
-                        intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                        mContext.startActivity(intentInstall);
-                    }
 
-                    DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
-                    DownLoadModel mDown = new DownLoadModel();
-                    mDown.setmAppContent(mAppContent);
-                    mDown.setInfo(infoss);
-                    EventBus.getDefault().post(mDown);
-                    return;
+        private void installApk() {
+            File[] files = mRxDownload.getRealFiles(model.getmAppContent().downloadPath);
+            if (files != null) {
+                Uri uri = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    uri = FileProvider.getUriForFile(mContext, mContext.getApplicationInfo().packageName + ".provider", files[0]);
                 } else {
-                    //去重新下载
-                    //tv_download.setText("暂停");
-                    setByStatus(DownLoadManager.STATE_DOWNLOADING);
-                    infos.getDownLoadTask().reStart();
-                    setDowState(DownLoadManager.STATE_DOWNLOADING);
-                    DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
-                    DownLoadModel mDown = new DownLoadModel();
-                    mDown.setmAppContent(mAppContent);
-                    mDown.setInfo(infoss);
-                   EventBus.getDefault().post(mDown);
-                    return;
+                    uri = Uri.fromFile(files[0]);
                 }
-
-            }
-
-            if (infos.getState() == DownLoadManager.STATE_WAITING) {
-                //tv_download.setText("暂停");
-                setByStatus(DownLoadManager.STATE_DOWNLOADING);
-                infos.getDownLoadTask().reStart();
-                setDowState(DownLoadManager.STATE_DOWNLOADING);
-                DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
-                DownLoadModel mDown = new DownLoadModel();
-                mDown.setmAppContent(mAppContent);
-                mDown.setInfo(infoss);
-                EventBus.getDefault().post(mDown);
-                return;
-            }
-
-            if (infos.getState() == DownLoadManager.STATE_PAUSE) {
-                //tv_download.setText("暂停");
-                setByStatus(DownLoadManager.STATE_DOWNLOADING);
-                infos.getDownLoadTask().resume();
-                setDowState(DownLoadManager.STATE_DOWNLOADING);
-                DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
-                DownLoadModel mDown = new DownLoadModel();
-                mDown.setmAppContent(mAppContent);
-                mDown.setInfo(infoss);
-                EventBus.getDefault().post(mDown);
-                return;
-            }
-            if (infos.getState() == DownLoadManager.STATE_DOWNLOADING) {
-                //tv_download.setText("继续");
-                setByStatus(DownLoadManager.STATE_PAUSE);
-                infos.getDownLoadTask().pause();
-                setDowState(DownLoadManager.STATE_PAUSE);
-                DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
-                DownLoadModel mDown = new DownLoadModel();
-                mDown.setmAppContent(mAppContent);
-                mDown.setInfo(infoss);
-                EventBus.getDefault().post(mDown);
-                return;
-            }
-            if (infos.getState() == DownLoadManager.STATE_ERROR) {
-                //tv_download.setText("暂停");
-                setByStatus(DownLoadManager.STATE_DOWNLOADING);
-                infos.getDownLoadTask().reStart();
-                setDowState(DownLoadManager.STATE_DOWNLOADING);
-                DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
-                DownLoadModel mDown = new DownLoadModel();
-                mDown.setmAppContent(mAppContent);
-                mDown.setInfo(infoss);
-                EventBus.getDefault().post(mDown);
-                return;
-            }
-            if (infos.getState() == DownLoadManager.AlreadyInstalled) {
-                //tv_download.setText("打开");
-                setByStatus(DownLoadManager.AlreadyInstalled);
-                setDowState(DownLoadManager.AlreadyInstalled);
-                if (MonitorSysReceiver.checkApkExist(mContext, mAppContent.packageName, mAppContent.gameId)) {
-                    PackageManager packageManager = mContext.getApplicationContext().getPackageManager();
-                    if (packageManager != null) {
-                        Intent intent = new Intent();
-                        intent = packageManager.getLaunchIntentForPackage(mAppContent.packageName);
-                        if (intent != null) {
-                            mContext.startActivity(intent);
-                        }
-                    }
-                } else {
-
-                    // 下载完成后弹出安装窗
-                    File file = new File(DownLoadManager.getManager().deFaultDir + infos.getFileName());
-                    Intent intentInstall = new Intent();
-                    intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intentInstall.setAction(Intent.ACTION_VIEW);
-                    intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                    mContext.startActivity(intentInstall);
-
-                    DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
-                    DownLoadModel mDown = new DownLoadModel();
-                    mDown.setmAppContent(mAppContent);
-                    mDown.setInfo(infoss);
-                    EventBus.getDefault().post(mDown);
-                    return;
-                }
-
-                DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
-                DownLoadModel mDown = new DownLoadModel();
-                mDown.setmAppContent(mAppContent);
-                mDown.setInfo(infoss);
-                EventBus.getDefault().post(mDown);
-                return;
-            }
-        }
-
-
-        private double getRealNum(double num) {
-            BigDecimal bg = new BigDecimal(num);
-            return bg.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
-        }
-
-        /**
-         * 根据状态设置图标
-         *
-         * @param
-         * @param status
-         */
-        private void setByStatus(int status) {
-
-            switch (status) {
-                case DownLoadManager.STATE_DOWNLOADING:
-                    item_mLinearMsg.setVisibility(View.GONE);
-                    mLinear_progress.setVisibility(View.VISIBLE);
-                    break;
-                case DownLoadManager.STATE_ERROR:
-                    item_mLinearMsg.setVisibility(View.VISIBLE);
-                    mLinear_progress.setVisibility(View.GONE);
-                    break;
-                case DownLoadManager.STATE_WAITING:
-                    item_mLinearMsg.setVisibility(View.VISIBLE);
-                    mLinear_progress.setVisibility(View.GONE);
-                    break;
-                case DownLoadManager.STATE_PAUSE:
-                    item_mLinearMsg.setVisibility(View.VISIBLE);
-                    mLinear_progress.setVisibility(View.GONE);
-                    break;
-                case DownLoadManager.STATE_FINISH:
-                    item_mLinearMsg.setVisibility(View.GONE);
-                    mLinear_progress.setVisibility(View.VISIBLE);
-                    break;
-                case DownLoadManager.AlreadyInstalled:
-                    item_mLinearMsg.setVisibility(View.VISIBLE);
-                    mLinear_progress.setVisibility(View.GONE);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        /*
-        public static final int STATE_WAITING = 1;      //等待    --> 下载，暂停
-        public static final int STATE_DOWNLOADING = 2;  //下载中  --> 暂停，完成，错误
-        public static final int STATE_PAUSE = 3;        //暂停    --> 等待，下载
-        public static final int STATE_FINISH = 4;       //完成    --> 重新下载
-        public static final int STATE_ERROR = 5;        //错误    --> 等待
-        public static final int AlreadyInstalled = 6;        //安装    --> 打开应用*/
-        public void setDowState(int state) {
-            switch (state) {
-                case DownLoadManager.STATE_WAITING:
-                    tv_download.setBackgroundResource(R.drawable.home_install);
-                    tv_download.setText("");
-                    break;
-                case DownLoadManager.STATE_DOWNLOADING:
-                    tv_download.setBackgroundResource(R.drawable.apk_state);
-                    tv_download.setText("暂停");
-                    break;
-
-                case DownLoadManager.STATE_PAUSE:
-                    tv_download.setBackgroundResource(R.drawable.apk_state);
-                    tv_download.setText("继续");
-                    break;
-
-                case DownLoadManager.STATE_FINISH:
-
-                    break;
-
-                case DownLoadManager.STATE_ERROR:
-                    tv_download.setBackgroundResource(R.drawable.apk_state);
-                    tv_download.setText("等待");
-                    break;
-
-                case DownLoadManager.AlreadyInstalled:
-                    tv_download.setBackgroundResource(R.drawable.home_open);
-                    tv_download.setText("");
-                    break;
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                mContext.startActivity(intent);
+            } else {
+                Toast.makeText(mContext, "File not exists", Toast.LENGTH_SHORT).show();
             }
         }
     }

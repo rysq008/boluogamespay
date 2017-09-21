@@ -12,8 +12,10 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpException;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -43,11 +45,13 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import com.game.helper.util.APNManager;
+import com.game.helper.util.SharedPreUtil;
 import com.game.helper.util.TimeUtil;
 import com.game.helper.util.ToastUtil;
 import com.google.gson.JsonObject;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import butterknife.internal.Utils;
@@ -137,7 +141,7 @@ public abstract class BaseNetwork implements HttpComm {
      *
      * @return result
      *//*
-	public String getResult() {
+    public String getResult() {
 		if (parser != null)
 			return parser.getResult();
 		return "";
@@ -176,8 +180,10 @@ public abstract class BaseNetwork implements HttpComm {
             conn = checkNetType(url, conn, context);
             conn.setRequestProperty(AUTH_KEY, AUTH_SECRET);
             conn.setRequestProperty(ACCEPT_ENCODING, GZIP);
+            conn.setRequestProperty(SESSION_ID, SharedPreUtil.getSessionId());
             conn.setRequestMethod(METHOD_GET);
             conn.setConnectTimeout(HTTP_TIMEOUT);
+
             Log.e("lbb", "url->" + url + "--code->"
                     + conn.getResponseCode());
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -215,6 +221,7 @@ public abstract class BaseNetwork implements HttpComm {
             conn.setRequestMethod(METHOD_GET);
             conn.setRequestProperty(ACCEPT_ENCODING, GZIP);
             conn.setConnectTimeout(HTTP_TIMEOUT);
+            conn.setRequestProperty(SESSION_ID, SharedPreUtil.getSessionId());
 
             // 设置 HttpURLConnection的字符编码
             conn.setRequestProperty(ACCEPT_CHARSET, encoding);
@@ -267,7 +274,8 @@ public abstract class BaseNetwork implements HttpComm {
 
             String method = JSONUtils.getString(data, "method", "");
             StringEntity HE = new StringEntity(data, HTTP.UTF_8);
-            HttpPost hp = new HttpPost(url.concat(method));
+            HttpPost hp = new HttpPost(url/*.concat(method)*/);
+//            hp.setHeader(SESSION_ID, SharedPreUtil.getSessionId());
 
             // 设置发送内容
             hp.setEntity(HE);
@@ -275,54 +283,32 @@ public abstract class BaseNetwork implements HttpComm {
             HttpConnectionParams.setConnectionTimeout(httpParams, CONNECTION_TIMEOUT);
             HttpConnectionParams.setSoTimeout(httpParams, SO_TIMEOUT);
             DefaultHttpClient hc = new DefaultHttpClient(httpParams);
-//			HttpClient hc = new DefaultHttpClient();
             hc.setHttpRequestRetryHandler(new DefaultHttpRequestRetryHandler(0, false)); //不加此处，竖版的超时不会重复发送请求数据，横版的会发送4次，设置之后就只发送一次了
-
-//			HttpResponse response = hc.execute(hp, context);
             HttpResponse hr = hc.execute(hp);
-            if (hr.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            int code = hr.getStatusLine().getStatusCode();
+            if (code == HttpStatus.SC_OK) {
                 // 根据你的逻辑，判断返回的值是不是表示已经登录成功
-                {
+                if (TextUtils.equals("/member/login/", method)) {
                     CookieStore mCookieStore = hc.getCookieStore();
                     List<Cookie> cookies = mCookieStore.getCookies();
                     if (!cookies.isEmpty()) {
                         for (int i = cookies.size(); i > 0; i--) {
                             Cookie cookie = cookies.get(i - 1);
                             if (cookie.getName().equalsIgnoreCase("sessionid")) {
-
+                                SharedPreUtil.saveSessionId(cookie.getValue());
                             }
                         }
                     }
                 }
-            }
-            // 请求超时
-//			hc.getParams().setParameter(
-//					CoreConnectionPNames.CONNECTION_TIMEOUT,
-//					CONNECTION_TIMEOUT);
-//			// 读取超时
-////			hc.getParams().setParameter(
-////					CoreConnectionPNames.SO_TIMEOUT, SO_TIMEOUT);
-//			hc.getParams().setParameter(
-//					CoreConnectionPNames.SO_TIMEOUT, 5000);
-            //hc.getParams().set
-            // 使用客户端发请求对象，返回响应对象
-//			HttpResponse hr = hc.execute(hp);
-            int code = hr.getStatusLine().getStatusCode();
-            CODE = code;
-            Log.e("lbb", "[responseCode:]->[" + code + "]");
-            if (code != HttpStatus.SC_OK) {
+                // 获取响应内容
+                HttpEntity he = hr.getEntity();
+                is = he.getContent();
+                return is;
+            } else {
                 // 中断请求
                 hp.abort();
                 return null;
             }
-			/*LogUtils.addLog("[responseCode:]->[" + code+"]");*/
-            // 获取响应内容
-            HttpEntity he = hr.getEntity();
-            is = he.getContent();
-            //String strResult = EntityUtils.toString(he);
-            //Log.e("lbb","[back:]->[" +   (strResult.toString()) +"]");
-            // 转化为流
-            return is;
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("lbb", "[try-catch:]->" + e.getMessage() + e.getLocalizedMessage() + "]");
@@ -342,8 +328,7 @@ public abstract class BaseNetwork implements HttpComm {
      * @return
      * @throws IOException
      */
-    private HttpURLConnection checkNetType(URL url, HttpURLConnection conn,
-                                           Context context) throws IOException {
+    private HttpURLConnection checkNetType(URL url, HttpURLConnection conn, Context context) throws IOException {
         APNManager apnManager = new APNManager(context);
         if (apnManager.isWapNetwork()) {
             Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(apnManager.getProxy(), apnManager.getProxyPort()));

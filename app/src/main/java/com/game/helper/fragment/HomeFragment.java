@@ -120,7 +120,7 @@ public class HomeFragment extends BaseFragment implements MsetV {
     @BindView(R.id.home_cursor)
     ImageView homeCursor;
     @BindView(R.id.home_showlist_viewPager)
-    ViewPager homeShowlistViewPager;
+    ViewPager homeShowlistViewPager;//*********************************************新游上架，热闹推荐，特价推广
     @BindView(R.id.home_pager_list_title_iv1)
     ImageView homePagerListTitleIv1;
     @BindView(R.id.home_pager_list_title_iv2)
@@ -164,7 +164,7 @@ public class HomeFragment extends BaseFragment implements MsetV {
 
     //特价游戏
     RelativeLayout relat_Specialgame;
-    ListView mSpecialgame_ListView;
+    ListView mSpecialgame_ListView;//*************************************************变态手游列表
     SpecialgameAdapter mSpecialgameAdapter1;
     private ArrayList<AppContent> mmSpecialgameAdapter1List = new ArrayList<AppContent>();
 
@@ -876,7 +876,7 @@ public class HomeFragment extends BaseFragment implements MsetV {
                 ((BaseActivity) getActivity()).startActivity(SearchActivity.class);
                 break;
             case R.id.tv_searcher:
-                if ((getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1) {//1:登录成功，0：登录失败
+                if (SharedPreUtil.isLogin()/*(getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1*/) {//1:登录成功，0：登录失败
                     //系统消息
                     ((BaseActivity) getActivity()).startActivity(MineSystemMsgActivity.class);
                 } else {
@@ -912,11 +912,10 @@ public class HomeFragment extends BaseFragment implements MsetV {
                 ((BaseActivity) getActivity()).startActivity(GameClassifyActivity.class);
                 break;
             case R.id.home_imageView_pic:
-                if ((getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1) {//1:登录成功，0：登录失败
-
+                if (SharedPreUtil.isLogin()/*(getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1*/) {//1:登录成功，0：登录失败
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.setTable(3);
-                }else{
+                } else {
                     ((BaseActivity) getActivity()).startActivity(LoginActivity.class);
                 }
 

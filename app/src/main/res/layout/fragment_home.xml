@@ -9,11 +9,11 @@
         android:id="@+id/home_scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:fillViewport="true"
-        android:scrollbars="none"
         android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/include"
         android:layout_toRightOf="@+id/include"
-        android:layout_toEndOf="@+id/include">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
 
         <LinearLayout
@@ -24,22 +24,22 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="200dp"
+                android:layout_marginTop="@dimen/DIMEN_65DP"
                 android:background="@drawable/health_medal_background"
                 android:descendantFocusability="beforeDescendants"
                 android:focusable="true"
-                android:layout_marginTop="@dimen/DIMEN_65DP"
                 android:focusableInTouchMode="true">
 
                 <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
                     android:id="@+id/viewPager"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:fadingEdge="none"
                     android:flipInterval="30"
-                    android:persistentDrawingCache="animation"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:persistentDrawingCache="animation" />
 
                 <LinearLayout
                     android:id="@+id/imgTipsLayout"
@@ -248,8 +248,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="@dimen/DIMEN_5DP"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="@dimen/DIMEN_5DP"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -260,6 +260,7 @@
                     android:layout_marginRight="10dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/home_activity" />
+
                 <com.game.helper.view.widget.BarrageView
                     android:id="@+id/containerView"
                     android:layout_width="match_parent"
@@ -298,9 +299,9 @@
                         android:id="@+id/home_tv_guid1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/DIMEN_7DP"
                         android:gravity="center"
                         android:text="@string/home_new_show"
-                        android:layout_marginLeft="@dimen/DIMEN_7DP"
                         android:textColor="@color/gh_qianhui_to_maincolor_selector"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -308,8 +309,7 @@
                 <View
                     android:layout_width="0.5dp"
                     android:layout_height="@dimen/DIMEN_17DP"
-                    android:background="@color/line"
-                    />
+                    android:background="@color/line" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -337,8 +337,7 @@
                 <View
                     android:layout_width="0.5dp"
                     android:layout_height="@dimen/DIMEN_17DP"
-                    android:background="@color/line"
-                    />
+                    android:background="@color/line" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -357,8 +356,8 @@
                         android:id="@+id/home_tv_guid3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginLeft="@dimen/DIMEN_7DP"
+                        android:gravity="center"
                         android:text="@string/home_sale_show"
                         android:textColor="@color/gh_qianhui_to_maincolor_selector"
                         android:textSize="14sp" />
@@ -416,9 +415,9 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:scaleType="fitXY"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/DIMEN_86DP"
+                        android:scaleType="fitXY"
                         android:src="@drawable/home_mobile_banner" />
 
                 </RelativeLayout>
@@ -450,9 +449,9 @@
                     android:background="@drawable/public_selector">
 
                     <ImageView
-                        android:scaleType="fitXY"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/DIMEN_86DP"
+                        android:scaleType="fitXY"
                         android:src="@drawable/home_page_banner" />
                 </RelativeLayout>
 
@@ -574,10 +573,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/include"
         android:layout_toRightOf="@+id/include"
-        android:layout_toEndOf="@+id/include">
+        android:background="@null">
 
         <ImageView
             android:id="@+id/iv_call"
@@ -613,7 +612,7 @@
             android:layout_height="35dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/DIMEN_9DP"/>
+            android:layout_marginLeft="@dimen/DIMEN_9DP" />
 
         <LinearLayout
             android:id="@+id/LinearLayout_searcher"

@@ -12,6 +12,7 @@ import java.util.Map;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Base64;
 
@@ -21,6 +22,7 @@ import com.umeng.analytics.MobclickAgent;
 public class SharedPreUtil {
 
     private static final String SharedPreference_Name = "g9_android_myConfig_lbb";
+    private static final String SharedPreference_SessionId = "sessionId";
 
     private static SharedPreferences sp;
 
@@ -28,11 +30,15 @@ public class SharedPreUtil {
 
     private static SharedPreferences getSharedPre(Context context) {
         if (sp == null) {
-            sp = context.getSharedPreferences(SharedPreference_Name,
-                    Context.MODE_PRIVATE);
+            sp = context.getSharedPreferences(SharedPreference_Name, Context.MODE_PRIVATE);
             editor = sp.edit();
         }
         return sp;
+    }
+
+    public static void init(Context context) {
+        sp = PreferenceManager.getDefaultSharedPreferences(context);
+        editor = sp.edit();
     }
 
     /**
@@ -173,53 +179,22 @@ public class SharedPreUtil {
 
 
     //********************************************************************************************************************************************************************************//
-//    public static String getSessionId() {
-//        WxToken wxToken = getWxToken();
-//        if (wxToken != null) {
-//            return wxToken.unionid;
-//        }
-//        return null;
-//    }
-//
-//    public static void clearSessionId() {
-//        sp.edit().remove(KEY_WX_TOKEN).apply();
-//        MobclickAgent.onProfileSignOff();
-//    }
-//
-//    public static boolean checkSessionId() {
-//        String id = getUnionId();
-//        return !TextUtils.isEmpty(id);
-//    }
+    public static String getSessionId() {
+        return sp.getString(SharedPreference_SessionId, "");
+    }
 
-//    private static <T> T getObject(String key, Class<T> c) {
-//        if (TextUtils.isEmpty(key)) {
-//            return null;
-//        }
-//        String encryptedJson = sp.getString(key, null);
-//        if (TextUtils.isEmpty(encryptedJson)) {
-//            return null;
-//        }
-//        try {
-//            String decryptedJson = DESUtil.decrypt(encryptedJson, DESUtil.DEFAULT_KEY);
-//            return new Gson().fromJson(decryptedJson, c);
-//        } catch (Throwable t) {
-//            return null;
-//        }
-//    }
+    public static void saveSessionId(String sissonid) {
+        editor.putString(SharedPreference_SessionId, sissonid).apply();
+    }
 
-//    private static <T> String saveObject(String key, T t) {
-//        if (t == null) {
-//            return "";
-//        }
-//        String json = GsonFactory.getGson().toJson(t);
-//        try {
-//            String encryptedJson = des.encrypt(json);
-//            sp.edit().putString(key, encryptedJson).apply();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return json;
-//    }
+    public static void clearSessionId() {
+        sp.edit().remove(SharedPreference_SessionId).apply();
+    }
+
+    public static boolean isLogin() {
+        String id = getSessionId();
+        return !TextUtils.isEmpty(id);
+    }
 
     private static <T> T getObject(String key, Class<T> c) {
         if (TextUtils.isEmpty(key)) {

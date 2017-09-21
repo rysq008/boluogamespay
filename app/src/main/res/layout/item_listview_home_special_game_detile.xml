@@ -58,30 +58,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
-                    <!-- <RelativeLayout -->
-                    <!-- android:id="@+id/iv_logo" -->
-                    <!-- android:layout_width="wrap_content" -->
-                    <!-- android:layout_height="wrap_content" -->
-                    <!-- android:layout_marginRight="10dp" -->
-                    <!-- android:background="@drawable/shouye_zhekou" > -->
-
-
-                    <!-- <TextView -->
-                    <!-- android:id="@+id/tv_logo" -->
-                    <!-- android:layout_width="wrap_content" -->
-                    <!-- android:layout_height="wrap_content" -->
-                    <!-- android:layout_centerInParent="true" -->
-                    <!-- android:gravity="center" -->
-                    <!-- android:paddingBottom="2dp" -->
-                    <!-- android:paddingLeft="6dp" -->
-                    <!-- android:paddingRight="6dp" -->
-                    <!-- android:paddingTop="2dp" -->
-                    <!-- android:text="4.3折" -->
-                    <!-- android:textColor="@color/white" -->
-                    <!-- android:textSize="10sp" /> -->
-                    <!-- </RelativeLayout> -->
-
                     <TextView
                         android:id="@+id/tv_item"
                         android:layout_width="0dp"
