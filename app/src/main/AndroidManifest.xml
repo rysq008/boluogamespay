@@ -45,7 +45,7 @@
     <!-- 读写存储卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 装载和卸载文件系统 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 网络连接 -->
@@ -809,6 +809,18 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+        <!-- 應用卸載或安裝廣播 -->
+        <receiver
+            android:name=".receiver.AppInstallReceiver"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
@@ -833,7 +845,7 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -843,16 +855,16 @@
                 <data android:scheme="tencent1105689325" />
             </intent-filter>
         </activity>
-        <activity android:name="com.tencent.connect.common.AssistActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- QQ第三方登录相关       结束 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.game.helper.fileProvider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
