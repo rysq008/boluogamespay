@@ -16,6 +16,7 @@ public class DownLoadModel {
     private AppContent mAppContent;
     public Disposable disposable;
     public DownloadRecord record;
+    public boolean needRefreshAdapter = true;
 
 
     public DownLoadModel() {

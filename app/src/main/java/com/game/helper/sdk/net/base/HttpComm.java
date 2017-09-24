@@ -23,7 +23,7 @@ public interface HttpComm {
 	/** 用户注册接口 */
 	String API_register_Url =  "/tuser/register";
 	/**用户登录接口 */
-	String API_login_Url =  "/member/login/";
+	String API_login_Url =  "/tuser/login";
 	/**忘记密码/重置密码 */
 	String API_resetPwd_Url =  "/tuser/resetPwd";
 	/**修改密码接口 */

@@ -24,7 +24,7 @@ public abstract class BaseFragment extends Fragment implements OnClickListener, 
 
 	public BroadcastReceiver receiver;
 	public BaseApplication mApplication;
-	
+
 	public BaseFragment() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -43,7 +43,7 @@ public abstract class BaseFragment extends Fragment implements OnClickListener, 
 		return mView;
 	}
 
-	
+
 	protected View findViewById(int id) {
 		return mView.findViewById(id);
 	}
@@ -53,14 +53,14 @@ public abstract class BaseFragment extends Fragment implements OnClickListener, 
 	protected abstract void initEvents();
 
 	protected abstract void init();
-	
+
 	public void FragmentCache(View view) {
 		ViewGroup parent = (ViewGroup) mView.getParent();
 		if (parent != null) {
 			parent.removeView(mView);
 		}
 	}
-	
+
 	public void startActivity(Intent intent) {
 		super.startActivity(intent);
 		getActivity().overridePendingTransition(R.anim.base_slide_right_in,
@@ -76,7 +76,7 @@ public abstract class BaseFragment extends Fragment implements OnClickListener, 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -86,6 +86,6 @@ public abstract class BaseFragment extends Fragment implements OnClickListener, 
 			getActivity().unregisterReceiver(receiver);
 		super.onDestroy();
 	}
-	
-	
+
+
 }

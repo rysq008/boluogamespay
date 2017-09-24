@@ -65,13 +65,14 @@ public class DownLoadResponseBody extends ResponseBody {
             @Override
             public long read(Buffer sink, long byteCount) throws IOException {
                 //读取的字节数
-                if (downloadInfo.getState() == DownLoadManager.STATE_PAUSE ){//||downloadInfo.getState() == DownLoadManager.STATE_WAITING
+                if (downloadInfo.getState() == DownLoadManager.STATE_PAUSE) {//||downloadInfo.getState() == DownLoadManager.STATE_WAITING
                     bytesRead = 0;
                     return bytesRead;
                 }
+
                 try {
                     bytesRead = super.read(sink, byteCount);
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 if (bytesRead != -1) {
@@ -85,13 +86,13 @@ public class DownLoadResponseBody extends ResponseBody {
 
                 long progress = downloadInfo.getProgress();
                 long total = downloadInfo.getFileLength();
-                postMainThread(progress,total);
+                postMainThread(progress, total);
                 return bytesRead;
             }
         };
     }
 
-    private void postMainThread(long progress,long total){
-       fileRespondResult.onExecuting(progress,total,progress>=total);
+    private void postMainThread(long progress, long total) {
+        fileRespondResult.onExecuting(progress, total, progress >= total);
     }
 }

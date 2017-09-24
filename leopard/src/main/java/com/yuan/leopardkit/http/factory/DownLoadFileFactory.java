@@ -37,6 +37,7 @@ public class DownLoadFileFactory implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        String tn = Thread.currentThread().getName();
         Request request = chain.request().newBuilder().addHeader("RANGE", "bytes=" + downloadInfo.getBreakProgress() + "-").build();
         Response originalResponse = chain.proceed(request);
         DownLoadResponseBody body = new DownLoadResponseBody(this.downloadInfo ,originalResponse.body(), fileRespondResult);

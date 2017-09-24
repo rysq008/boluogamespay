@@ -119,7 +119,7 @@ public class SearchActivity extends BaseActivity implements MOnItemClickListener
     @Override
     protected void initView() {
         /*topTitle.setText("搜索");
-		topLeftBack.setVisibility(View.VISIBLE);*/
+        topLeftBack.setVisibility(View.VISIBLE);*/
 
         selectRefreshView.setOnRefreshListener(this);
 
@@ -335,7 +335,7 @@ public class SearchActivity extends BaseActivity implements MOnItemClickListener
                         //initStatus();
                         mSpecialgameAdapter.setmList(mmSpecialgameAdapter1List);
                         searchGameResult_listView.deferNotifyDataSetChanged();
-                        Util.setHeight(mList.size(), searchGameResult_listView,SearchActivity.this );
+                        Util.setHeight(mList.size(), searchGameResult_listView, SearchActivity.this);
                         page++;
                     }
                     if (mQueryHotWord.data != null && mQueryHotWord.data.size() < 9) {
@@ -463,7 +463,7 @@ public class SearchActivity extends BaseActivity implements MOnItemClickListener
     }
 
     public void onEventMainThread(DownLoadModel event) {
-        if (event != null) {
+        if (event != null && isForeground(this) && event.needRefreshAdapter) {
             if (BaseApplication.mInstance.isRecommendBoutiqueAdapter != 0) {
 
                 for (DownLoadModel md : mSpecialgameAdapter.getData()) {

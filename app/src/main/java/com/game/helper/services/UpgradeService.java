@@ -40,6 +40,7 @@ import com.game.helper.activity.mine.MineSetingActivity;
 import com.game.helper.interfaces.comm.CommValues;
 import com.game.helper.services.ui.MyProgressBar;
 import com.game.helper.services.ui.MyUpdateDailog;
+import com.game.helper.util.FileUtil;
 import com.game.helper.util.SharedPreUtil;
 import com.game.helper.util.SystemUtil;
 import com.game.helper.util.ToastUtil;
@@ -484,11 +485,13 @@ public class UpgradeService extends IntentService implements CommValues {
 		
 		// 下载完成后弹出安装窗
 		File file = new File(UPDATA_PATH + newName);
-		Intent intentInstall = new Intent();
-		intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intentInstall.setAction(Intent.ACTION_VIEW);
-		intentInstall.setDataAndType(Uri.fromFile(file), ACTION_INSTALL);
-		startActivity(intentInstall);
+//		Intent intentInstall = new Intent();
+//		intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		intentInstall.setAction(Intent.ACTION_VIEW);
+//		intentInstall.setDataAndType(Uri.fromFile(file), ACTION_INSTALL);
+//		startActivity(intentInstall);
+
+        FileUtil.apkInstall(file,context);
 
 		if(BaseApplication.mInstance.isCancelable==false){
 			if(BaseActivity.activityList != null){

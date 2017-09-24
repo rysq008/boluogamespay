@@ -7,7 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/bbxpc_android_lib_MyListView/bbxpc_android_lib_MyListView.iml" filepath="$PROJECT_DIR$/bbxpc_android_lib_MyListView/bbxpc_android_lib_MyListView.iml" />
       <module fileurl="file://$PROJECT_DIR$/bbxpc_game_helper/bbxpc_game_helper.iml" filepath="$PROJECT_DIR$/bbxpc_game_helper/bbxpc_game_helper.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/boluogamespay.iml" filepath="$PROJECT_DIR$/.idea/boluogamespay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boluogamespay.iml" filepath="$PROJECT_DIR$/boluogamespay.iml" />
       <module fileurl="file://$PROJECT_DIR$/leopard/leopard.iml" filepath="$PROJECT_DIR$/leopard/leopard.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs_wheel/libs_wheel.iml" filepath="$PROJECT_DIR$/libs_wheel/libs_wheel.iml" />

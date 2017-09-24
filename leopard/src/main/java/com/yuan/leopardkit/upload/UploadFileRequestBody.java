@@ -60,6 +60,7 @@ public class UploadFileRequestBody extends RequestBody {
     }
 
     private Sink sink(Sink sink) {
+        String tn = Thread.currentThread().getName();
         return new ForwardingSink(sink) {
             //当前写入字节数
             long bytesWritten = 0L;

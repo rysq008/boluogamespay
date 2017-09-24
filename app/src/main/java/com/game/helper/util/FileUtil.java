@@ -6,9 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -97,4 +100,18 @@ public class FileUtil {
 		}
 		context.startActivity(intent);
 	}
+
+	public static boolean isAvilible( Context context, String packageName )
+	{
+		final PackageManager packageManager = context.getPackageManager();
+		// 获取所有已安装程序的包信息
+		List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+		for ( int i = 0; i < pinfo.size(); i++ )
+		{
+			if(pinfo.get(i).packageName.equalsIgnoreCase(packageName))
+				return true;
+		}
+		return false;
+	}
+
 }

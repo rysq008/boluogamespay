@@ -59,7 +59,7 @@ public class SpecialGameActivity extends BaseActivity {
         //mSpecialgameAdapter1.setOnItemClickListener(this);
         mSpecialGame_listView.setAdapter(mSpecialgameAdapter1);
         /*IntentFilter intent = new IntentFilter(Constants.DOWNLOAD_MSG);
-		registerReceiver(downloadStatusReceiver, intent);*/
+        registerReceiver(downloadStatusReceiver, intent);*/
 		/*mSpecialGame_listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -90,7 +90,7 @@ public class SpecialGameActivity extends BaseActivity {
             }
         }
 
-        new QueryGameByModularTask(mContext, MODE_TJ, "","0", new Back() {
+        new QueryGameByModularTask(mContext, MODE_TJ, "", "0", new Back() {
 
             @Override
             public void success(Object object, String msg) {
@@ -378,7 +378,7 @@ public class SpecialGameActivity extends BaseActivity {
     }
 
     public void onEventMainThread(DownLoadModel event) {
-        if (event != null) {
+        if (event != null && isForeground(this) && event.needRefreshAdapter) {
             if (BaseApplication.mInstance.isRecommendBoutiqueAdapter != 0) {
 
                 for (DownLoadModel md : mSpecialgameAdapter1.getData()) {

@@ -1,10 +1,6 @@
 package com.game.helper.fragment.home;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +14,9 @@ import com.game.helper.download.bean.AppContent;
 import com.game.helper.leopardkit.DownLoadModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -101,7 +95,7 @@ public class HomePageListNewGameFragment extends BaseFragment {
     }
 
     public void onEventMainThread(final DownLoadModel event) {
-        if (event != null) {
+        if (event != null && getUserVisibleHint() && event.needRefreshAdapter) {
             if (BaseApplication.mInstance.isRecommendBoutiqueAdapter != 0) {
 
                 for (final DownLoadModel md : mSpecialgameAdapter.getData()) {
@@ -110,7 +104,7 @@ public class HomePageListNewGameFragment extends BaseFragment {
                             && md.getmAppContent().gameId.equals(event.getmAppContent().gameId)) {
 
                         mSpecialgameAdapter.getData().set(mSpecialgameAdapter.getData().indexOf(md), event);
-                                mSpecialgameAdapter.notifyDataSetChanged();
+                        mSpecialgameAdapter.notifyDataSetChanged();
                         break;
                     }
                 }

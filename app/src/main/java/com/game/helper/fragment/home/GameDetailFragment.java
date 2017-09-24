@@ -38,6 +38,7 @@ import com.game.helper.net.task.QueryGameImgTask;
 import com.game.helper.sdk.model.returns.LoginData;
 import com.game.helper.sdk.model.returns.QueryGameImg;
 import com.game.helper.sdk.model.returns.QueryGameImg.GameImg;
+import com.game.helper.util.FileUtil;
 import com.game.helper.view.widget.ListViewForScrollView;
 import com.umeng.analytics.MobclickAgent;
 import com.yuan.leopardkit.LeopardHttp;
@@ -408,11 +409,12 @@ public class GameDetailFragment extends BaseFragment {
 
                                         // 下载完成后弹出安装窗
                                         File file = new File(DownLoadManager.getManager().deFaultDir + infos.getFileName());
-                                        Intent intentInstall = new Intent();
-                                        intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        intentInstall.setAction(Intent.ACTION_VIEW);
-                                        intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                                        mContext.startActivity(intentInstall);
+//                                        Intent intentInstall = new Intent();
+//                                        intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                        intentInstall.setAction(Intent.ACTION_VIEW);
+//                                        intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//                                        mContext.startActivity(intentInstall);
+                                        FileUtil.apkInstall(file,mContext);
                                     }
                                 }
                             }
@@ -455,11 +457,12 @@ public class GameDetailFragment extends BaseFragment {
 
                                 // 下载完成后弹出安装窗
                                 File file = new File(DownLoadManager.getManager().deFaultDir + infos.getFileName());
-                                Intent intentInstall = new Intent();
-                                intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intentInstall.setAction(Intent.ACTION_VIEW);
-                                intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                                mContext.startActivity(intentInstall);
+//                                Intent intentInstall = new Intent();
+//                                intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                intentInstall.setAction(Intent.ACTION_VIEW);
+//                                intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//                                mContext.startActivity(intentInstall);
+                                FileUtil.apkInstall(file,mContext);
                             }
 
                             DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
@@ -561,11 +564,12 @@ public class GameDetailFragment extends BaseFragment {
 
                             // 下载完成后弹出安装窗
                             File file = new File(DownLoadManager.getManager().deFaultDir + infos.getFileName());
-                            Intent intentInstall = new Intent();
-                            intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intentInstall.setAction(Intent.ACTION_VIEW);
-                            intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                            mContext.startActivity(intentInstall);
+//                            Intent intentInstall = new Intent();
+//                            intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            intentInstall.setAction(Intent.ACTION_VIEW);
+//                            intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//                            mContext.startActivity(intentInstall);
+                            FileUtil.apkInstall(file,mContext);
                         }
 
                         DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();

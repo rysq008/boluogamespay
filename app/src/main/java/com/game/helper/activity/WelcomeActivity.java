@@ -203,117 +203,117 @@ public class WelcomeActivity extends BaseActivity {
 
     public void toLogin() {
         final int isFirst = getIsFirst();//是否首次进入程序:0为首次否则为非首次进入程序
-        if (isFirst != 1) {
-            Bundle bundle = new Bundle();
-            bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
-            jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
-        } else {
-            if (SharedPreUtil.isLogin()) {
-                Login mLogin = new Login();
-                mLogin.data = user;
-                if (mLogin.data != null) {
-                    JPushInterface.init(getApplicationContext());
-                    JPushInterface.resumePush(getApplicationContext());
-                    //调用JPush API设置Alias
-                    mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, user.phone));
-                    jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
-                    LoginUtil.loginSuccess(mContext, mLogin.data.userId);
-                } else {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
-                    jumpActivity(MainActivity.class, LOGO_TIME_DELAY1, bundle);
-                }
-            } else {
-                Bundle bundle = new Bundle();
-                bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
-                jumpActivity(MainActivity.class, LOGO_TIME_DELAY1, bundle);
-            }
-        }
-
-//        if (user != null) {//存储用户信息为非空
-//            if (!TextUtils.isEmpty(user.phone) && !TextUtils.isEmpty(user.pwd)) {//用户名密码登录
-//                if (SystemUtil.getNetworkStatus(mContext)) {//网络连接正常
-//                    if (isFirst == 1) {//非首次进入程序
-//                        new LoginTask(mContext, false, user.phone, user.pwd, new Back() {
-//
-//                            @Override
-//                            public void success(Object object, String msg) {
-//                                if (object != null && object instanceof Login) {
-//                                    Login mLogin = (Login) object;
-//                                    if (mLogin.data != null) {
-//                                        JPushInterface.init(getApplicationContext());
-//                                        JPushInterface.resumePush(getApplicationContext());
-//                                        //调用JPush API设置Alias
-//                                        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, user.phone));
-//                                        //ToastUtil.showToast(mContext, "登录成功");
-//                                        mLogin.data.jsonData = null;
-//                                        mLogin.data.jsonData = new JsonBuild().setModel(mLogin.data).getJsonString1();
-//                                        DBManager.getInstance(mContext).insert(mLogin.data);
-//                                        //DBManager.getInstance(mContext).insert(mLogin.data.userId,pwd, phone);
-//                                        if (isFirst == 1) {//非首次进入程序
-//                                            jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
-//                                            LoginUtil.loginSuccess(mContext, mLogin.data.userId);
-//                                        } else {
-//                                            Bundle bundle = new Bundle();
-//                                            bundle.putInt(KEY_FIRSTUSER, 1);//1:登录成功，0：登录失败
-//                                            jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
-//                                        }
-//                                    }
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void fail(String status, String msg, Object object) {
-//                                //ToastUtil.showToast(mContext, msg);
-//                                //startActivity(LoginActivity.class);
-//                                if (isFirst == 1) {//非首次进入程序
-//                                    //jumpActivity(LoginTask.time_start, LoginTask.time_end, LoginActivity.class);
-//                                    jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
-//                                    //finish();
-//                                } else {
-//                                    Bundle bundle = new Bundle();
-//                                    bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
-//                                    jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
-//                                }
-//                            }
-//                        }).start();
-//                    } else {//首次进入程序
-//                        Bundle bundle = new Bundle();
-//                        bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
-//                        jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
-//                    }
-//
-//                } else {//网络连接异常
-//                    if (isFirst == 1) {//非首次进入程序
-//                        //jumpActivity(LoginActivity.class, LOGO_TIME_DELAY);
-//                        jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
-//                    } else {
-//                        Bundle bundle = new Bundle();
-//                        bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
-//                        jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
-//                    }
-//                }
-//            } else {//用户名或者密码为空
-//                // 不存在 ，直接跳转到登陆界面
-//                if (isFirst == 1) {//非首次进入程序
-//                    //jumpActivity(LoginActivity.class, LOGO_TIME_DELAY);
+//        if (isFirst != 1) {
+//            Bundle bundle = new Bundle();
+//            bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
+//            jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+//        } else {
+//            if (SharedPreUtil.isLogin()) {
+//                Login mLogin = new Login();
+//                mLogin.data = user;
+//                if (mLogin.data != null) {
+//                    JPushInterface.init(getApplicationContext());
+//                    JPushInterface.resumePush(getApplicationContext());
+//                    //调用JPush API设置Alias
+//                    mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, user.phone));
 //                    jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
+//                    LoginUtil.loginSuccess(mContext, mLogin.data.userId);
 //                } else {
 //                    Bundle bundle = new Bundle();
 //                    bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
-//                    jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+//                    jumpActivity(MainActivity.class, LOGO_TIME_DELAY1, bundle);
 //                }
-//            }
-//        } else {//存储用户信息为空
-//            if (isFirst == 1) {//非首次进入程序
-//                //jumpActivity(LoginActivity.class, LOGO_TIME_DELAY);
-//                jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
 //            } else {
 //                Bundle bundle = new Bundle();
 //                bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
-//                jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+//                jumpActivity(MainActivity.class, LOGO_TIME_DELAY1, bundle);
 //            }
 //        }
+
+        if (user != null) {//存储用户信息为非空
+            if (!TextUtils.isEmpty(user.phone) && !TextUtils.isEmpty(user.pwd)) {//用户名密码登录
+                if (SystemUtil.getNetworkStatus(mContext)) {//网络连接正常
+                    if (isFirst == 1) {//非首次进入程序
+                        new LoginTask(mContext, false, user.phone, user.pwd, new Back() {
+
+                            @Override
+                            public void success(Object object, String msg) {
+                                if (object != null && object instanceof Login) {
+                                    Login mLogin = (Login) object;
+                                    if (mLogin.data != null) {
+                                        JPushInterface.init(getApplicationContext());
+                                        JPushInterface.resumePush(getApplicationContext());
+                                        //调用JPush API设置Alias
+                                        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, user.phone));
+                                        //ToastUtil.showToast(mContext, "登录成功");
+                                        mLogin.data.jsonData = null;
+                                        mLogin.data.jsonData = new JsonBuild().setModel(mLogin.data).getJsonString1();
+                                        DBManager.getInstance(mContext).insert(mLogin.data);
+                                        //DBManager.getInstance(mContext).insert(mLogin.data.userId,pwd, phone);
+                                        if (isFirst == 1) {//非首次进入程序
+                                            jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
+                                            LoginUtil.loginSuccess(mContext, mLogin.data.userId);
+                                        } else {
+                                            Bundle bundle = new Bundle();
+                                            bundle.putInt(KEY_FIRSTUSER, 1);//1:登录成功，0：登录失败
+                                            jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void fail(String status, String msg, Object object) {
+                                //ToastUtil.showToast(mContext, msg);
+                                //startActivity(LoginActivity.class);
+                                if (isFirst == 1) {//非首次进入程序
+                                    //jumpActivity(LoginTask.time_start, LoginTask.time_end, LoginActivity.class);
+                                    jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
+                                    //finish();
+                                } else {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
+                                    jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+                                }
+                            }
+                        }).start();
+                    } else {//首次进入程序
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
+                        jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+                    }
+
+                } else {//网络连接异常
+                    if (isFirst == 1) {//非首次进入程序
+                        //jumpActivity(LoginActivity.class, LOGO_TIME_DELAY);
+                        jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
+                    } else {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
+                        jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+                    }
+                }
+            } else {//用户名或者密码为空
+                // 不存在 ，直接跳转到登陆界面
+                if (isFirst == 1) {//非首次进入程序
+                    //jumpActivity(LoginActivity.class, LOGO_TIME_DELAY);
+                    jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
+                    jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+                }
+            }
+        } else {//存储用户信息为空
+            if (isFirst == 1) {//非首次进入程序
+                //jumpActivity(LoginActivity.class, LOGO_TIME_DELAY);
+                jumpActivity(LoginTask.time_start, LoginTask.time_end, MainActivity.class);
+            } else {
+                Bundle bundle = new Bundle();
+                bundle.putInt(KEY_FIRSTUSER, 0);//1:登录成功，0：登录失败
+                jumpActivity(GuideActivity.class, LOGO_TIME_DELAY1, bundle);
+            }
+        }
     }
 
     @Override

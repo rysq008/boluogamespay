@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "F:\\workplace\\boluogamespay\\leopard\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values\\values.xml",
+        "outputFile": "C:\\Users\\zr\\AndroidStudioProjects\\boluogamespay\\leopard\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 98
                 },
                 "from": {
-                    "file": "F:\\workplace\\boluogamespay\\leopard\\src\\main\\res\\values\\strings.xml",
+                    "file": "C:\\Users\\zr\\AndroidStudioProjects\\boluogamespay\\leopard\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 1,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 148
                 },
                 "from": {
-                    "file": "F:\\workplace\\boluogamespay\\leopard\\src\\main\\res\\values\\strings.xml",
+                    "file": "C:\\Users\\zr\\AndroidStudioProjects\\boluogamespay\\leopard\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

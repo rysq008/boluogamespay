@@ -27,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +70,7 @@ public class LeopardClient {
 
     private MediaType jsonMediaType = MediaType.parse("application/json; charset=utf-8");
     private MediaType dataMediaType = MediaType.parse("multipart/form-data");
+
 
     public LeopardClient(BaseServerApi serverApi, Retrofit retrofit, Retrofit.Builder retrofitBuilder, OkHttpClient okHttpClient, OkHttpClient.Builder okHttpClientBuilder, boolean isJson) {
         this.serverApi = serverApi;
@@ -163,63 +163,48 @@ public class LeopardClient {
                 .subscribe(new BaseSubscriber(mContext, callback));
     }
 
-    public void downLoadFile(final DownloadInfo downloadInfo, FileRespondResult callback, DownLoadTask task){
+    public void downLoadFile(final DownloadInfo downloadInfo, final FileRespondResult callback, final DownLoadTask task) {
         // call 缓存实现
 //        serverApi.downloadFile(downloadInfo.getDownloadUrl())
 //                .compose(schedulersTransformer)
 //                .subscribe(new DownLoadSubscriber(callback,downloadInfo,task));
+
         Observable.create(new Observable.OnSubscribe<ResponseBody>() {
             @Override
             public void call(Subscriber<? super ResponseBody> subscriber) {
-                if (downloadInfo.getState() == DownLoadManager.STATE_PAUSE){//如果暂停就不请求了
-                    return ;
+                String tn = Thread.currentThread().getName();
+
+                if (downloadInfo.getState() == DownLoadManager.STATE_PAUSE) {//如果暂停就不请求了
+                    return;
                 }
                 Request request = new Request.Builder().url(downloadInfo.getUrl()).build();
                 try {
                     Response response = okHttpClient.newCall(request).execute();
-//                    if (downloadInfo.getFileLength() <= 0)
-                    downloadInfo.setFileLength(response.body().contentLength());
-                    downloadInfo.getDownLoadTask().writeCache(response.body().byteStream());
+                    ResponseBody responseBody = response.body();
+                    downloadInfo.setFileLength(responseBody.contentLength());
+                    downloadInfo.getDownLoadTask().writeCache(responseBody.byteStream());
                     // TODO: 2016/8/31 更新数据库 这里记得做下数据库延时更新
                     HttpDbUtil.instance.updateState(downloadInfo);
                     subscriber.onNext(response.body());
-                    Log.e(TAG, "yuan----download-f---" );
+                    Log.e(TAG, "yuan----download-f---");
                 } catch (Exception e) {
+                    subscriber.onError(e);
                     downloadInfo.setState(DownLoadManager.STATE_ERROR);
                     // TODO: 2016/8/31 更新数据库
                     HttpDbUtil.instance.updateState(downloadInfo);
-                    Log.e(TAG, "yuan--1231--len----" +e.getMessage() );
+                    Log.e(TAG, "yuan--1231--len----" + e.getMessage());
                     e.printStackTrace();
-                }finally {
+                } finally {
+                    subscriber.onCompleted();
                 }
             }
-        })
-                //避免doing too much work on its main thread.
-                .onBackpressureBuffer()
-                .subscribeOn(Schedulers.computation())
+        }).onBackpressureBuffer()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DownLoadSubscriber(callback,downloadInfo,task));
-    }
+                .subscribe(new DownLoadSubscriber(callback, downloadInfo, task));
 
-//    public DownLoadManager downLoadFile( FileDwonEnetity enetity, final FileRespondResult callback) {
-//        for (Interceptor interceptor : okHttpClient.interceptors()) {
-//            if (interceptor instanceof DownLoadFileFactory) {
-//                DownLoadFileFactory factory = (DownLoadFileFactory) interceptor;
-//                factory.setDownloadInfo(enetity.getDownloadInfo());
-//                factory.setProgressListener(new ProgressListener() {
-//                    @Override
-//                    public void onProgress(long progress, long total, boolean done) {
-//                        callback.onExecuting(progress, total, done);
-//                    }
-//                });
-//            }
-//        }
-//
-////        DownLoadManager downLoadManager =  new DownLoadManager(callback,enetity.getDownloadInfos(),serverApi);
-//        DownLoadManager downLoadManager = new DownLoadManager(callback,enetity.getDownloadInfos(),serverApi);
-//        downLoadManager.downloadStart();
-//        return downLoadManager;
-//    }
+
+    }
 
     final Observable.Transformer schedulersTransformer = new Observable.Transformer() {
         @Override
@@ -227,8 +212,7 @@ public class LeopardClient {
             return ((Observable) observable)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    ;
+                    .observeOn(AndroidSchedulers.mainThread());
         }
     };
 
@@ -273,7 +257,7 @@ public class LeopardClient {
             return this;
         }
 
-        public Builder addRequestComFactory(RequestComFactory factory){
+        public Builder addRequestComFactory(RequestComFactory factory) {
             this.requestComFactory = factory;
             return this;
         }
@@ -315,7 +299,7 @@ public class LeopardClient {
         }
 
         public LeopardClient build() {
-            if (this.requestComFactory != null){
+            if (this.requestComFactory != null) {
                 okHttpClientBuilder.addInterceptor(this.requestComFactory);
             }
 

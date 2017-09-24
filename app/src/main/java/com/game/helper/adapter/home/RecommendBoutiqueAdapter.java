@@ -21,6 +21,7 @@ import com.game.helper.leopardkit.DownLoadModel;
 import com.game.helper.net.base.BaseBBXTask.Back;
 import com.game.helper.net.task.DownloadFinishTask;
 import com.game.helper.sdk.model.returns.LoginData;
+import com.game.helper.util.FileUtil;
 import com.game.helper.view.widget.XCRoundImageViewByXfermode;
 import com.yuan.leopardkit.LeopardHttp;
 import com.yuan.leopardkit.db.HttpDbUtil;
@@ -368,11 +369,12 @@ public class RecommendBoutiqueAdapter extends BaseAdapter {
 
 												// 下载完成后弹出安装窗
 												File file = new File(DownLoadManager.getManager().deFaultDir+ infos.getFileName());
-												Intent intentInstall = new Intent();
-												intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-												intentInstall.setAction(Intent.ACTION_VIEW);
-												intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-												mContext.startActivity(intentInstall);
+//												Intent intentInstall = new Intent();
+//												intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//												intentInstall.setAction(Intent.ACTION_VIEW);
+//												intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//												mContext.startActivity(intentInstall);
+                                                FileUtil.apkInstall(file,mContext);
 											}
 											/*viewHolder.tv_download.setText("安装");
 											infos.getDownLoadTask().setState(DownLoadManager.STATE_FINISH);
@@ -538,11 +540,12 @@ public class RecommendBoutiqueAdapter extends BaseAdapter {
 
 									// 下载完成后弹出安装窗
 									File file = new File(DownLoadManager.getManager().deFaultDir+ infos.getFileName());
-									Intent intentInstall = new Intent();
-									intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-									intentInstall.setAction(Intent.ACTION_VIEW);
-									intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-									mContext.startActivity(intentInstall);
+//									Intent intentInstall = new Intent();
+//									intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//									intentInstall.setAction(Intent.ACTION_VIEW);
+//									intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//									mContext.startActivity(intentInstall);
+                                    FileUtil.apkInstall(file,mContext);
 								}
 
 								DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
@@ -632,11 +635,12 @@ public class RecommendBoutiqueAdapter extends BaseAdapter {
 
 								// 下载完成后弹出安装窗
 								File file = new File(DownLoadManager.getManager().deFaultDir+ infos.getFileName());
-								Intent intentInstall = new Intent();
-								intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								intentInstall.setAction(Intent.ACTION_VIEW);
-								intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-								mContext.startActivity(intentInstall);
+//								Intent intentInstall = new Intent();
+//								intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//								intentInstall.setAction(Intent.ACTION_VIEW);
+//								intentInstall.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//								mContext.startActivity(intentInstall);
+                                FileUtil.apkInstall(file,mContext);
 								
 								DownloadInfo infoss = infos.getDownLoadTask().getDownloadInfo();
 								DownLoadModel mDown=new DownLoadModel();

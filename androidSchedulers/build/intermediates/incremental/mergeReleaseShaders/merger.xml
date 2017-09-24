@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="F:\workplace\boluogamespay\androidSchedulers\src\main\shaders"/></dataSet><dataSet config="release"><source path="F:\workplace\boluogamespay\androidSchedulers\src\release\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\zr\AndroidStudioProjects\boluogamespay\androidSchedulers\src\main\shaders"/></dataSet><dataSet config="release"><source path="C:\Users\zr\AndroidStudioProjects\boluogamespay\androidSchedulers\src\release\shaders"/></dataSet></merger>

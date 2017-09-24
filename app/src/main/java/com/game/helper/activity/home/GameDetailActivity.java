@@ -192,8 +192,7 @@ public class GameDetailActivity extends BaseActivity implements PlatformActionLi
         topRight.setVisibility(View.VISIBLE);
 */
         if (mList.size() >= 1) {
-            mSpecialgameAdapter = new SpecialgameAdapter(this,
-                    mList, 3, R.id.home_fragment_pagelist_newgame_lv);
+            mSpecialgameAdapter = new SpecialgameAdapter(this, mList, 3, R.id.home_fragment_pagelist_newgame_lv);
             gameDetailLv.setAdapter(mSpecialgameAdapter);
             gameDetailLv.setEnabled(false);
         }
@@ -495,7 +494,8 @@ public class GameDetailActivity extends BaseActivity implements PlatformActionLi
     private ShareDialog shareDialog;
 
     @Override
-    @OnClick({R.id.top_left_layout, R.id.top_iv_right, R.id.game_detail_discount_rl})//,R.id.top_liner_right
+    @OnClick({R.id.top_left_layout, R.id.top_iv_right, R.id.game_detail_discount_rl})
+//,R.id.top_liner_right
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.top_left_layout:
@@ -592,10 +592,10 @@ public class GameDetailActivity extends BaseActivity implements PlatformActionLi
                 break;
 
             case R.id.game_detail_discount_rl:
-                Bundle bundleweb=new Bundle();
-                bundleweb.putString("Url","http://ghelper.h5h5h5.cn/helper/app/toBannerDisCount");
+                Bundle bundleweb = new Bundle();
+                bundleweb.putString("Url", "http://ghelper.h5h5h5.cn/helper/app/toBannerDisCount");
                 bundleweb.putString("TITLE", "自动折扣步骤");
-                ((BaseActivity)mContext).startActivity(WebActivity.class,bundleweb);
+                ((BaseActivity) mContext).startActivity(WebActivity.class, bundleweb);
                 break;
             default:
                 super.onClick(v);
@@ -1145,7 +1145,7 @@ public class GameDetailActivity extends BaseActivity implements PlatformActionLi
 
 
     public void onEventMainThread(DownLoadModel event) {
-        if (event != null) {
+        if (event != null && isForeground(this)) {
             if (BaseApplication.mInstance.isRecommendBoutiqueAdapter != 0) {
 
                 for (DownLoadModel md : mSpecialgameAdapter.getData()) {
@@ -1153,8 +1153,8 @@ public class GameDetailActivity extends BaseActivity implements PlatformActionLi
                     if (md.getmAppContent() != null && md.getmAppContent().gameId != null
                             && md.getmAppContent().gameId.equals(event.getmAppContent().gameId)) {
 
-                        mSpecialgameAdapter.getData().set(mSpecialgameAdapter.getData().indexOf(md), event);
-                        mSpecialgameAdapter.notifyDataSetChanged();
+//                        mSpecialgameAdapter.getData().set(mSpecialgameAdapter.getData().indexOf(md), event);
+                        mSpecialgameAdapter.upDataDownloadModel(mSpecialgameAdapter.getData().indexOf(md),event);
                         break;
                     }
                 }

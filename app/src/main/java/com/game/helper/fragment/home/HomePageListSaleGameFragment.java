@@ -1,7 +1,5 @@
 package com.game.helper.fragment.home;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,14 +13,11 @@ import com.game.helper.R;
 import com.game.helper.adapter.home.SpecialgameAdapter;
 import com.game.helper.download.bean.AppContent;
 import com.game.helper.leopardkit.DownLoadModel;
-import com.yuan.leopardkit.download.DownLoadManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -53,7 +48,7 @@ public class HomePageListSaleGameFragment extends BaseFragment {
     public static HomePageListSaleGameFragment newInstance(ArrayList<AppContent> mmSpecialgameAdapter2List) {
 
         Bundle args = new Bundle();
-        args.putParcelableArrayList("mmSpecialgameAdapter2List",mmSpecialgameAdapter2List);
+        args.putParcelableArrayList("mmSpecialgameAdapter2List", mmSpecialgameAdapter2List);
         HomePageListSaleGameFragment fragment = new HomePageListSaleGameFragment();
         fragment.setArguments(args);
         return fragment;
@@ -101,7 +96,7 @@ public class HomePageListSaleGameFragment extends BaseFragment {
     }
 
     public void onEventMainThread(DownLoadModel event) {
-        if (event != null) {
+        if (event != null && getUserVisibleHint() && event.needRefreshAdapter) {
             if (BaseApplication.mInstance.isRecommendBoutiqueAdapter != 0) {
 
                 for (DownLoadModel md : mSpecialgameAdapter.getData()) {

@@ -1,15 +1,12 @@
 package com.yuan.leopardkit;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.yuan.leopardkit.db.HttpDbUtil;
 import com.yuan.leopardkit.download.DownLoadManager;
@@ -24,11 +21,9 @@ import com.yuan.leopardkit.interfaces.FileRespondResult;
 import com.yuan.leopardkit.interfaces.HttpRespondResult;
 import com.yuan.leopardkit.interfaces.IProgress;
 import com.yuan.leopardkit.upload.FileUploadEnetity;
-import com.yuan.leopardkit.utils.NetWorkUtil;
 
 import java.util.HashMap;
 
-import okhttp3.internal.Util;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -83,6 +78,9 @@ public class LeopardHttp {
         }
     }
 
+
+    static final Handler handler = new Handler();
+
     /**
      * 下载入口
      *
@@ -93,56 +91,41 @@ public class LeopardHttp {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static DownloadInfo DWONLOAD(final DownloadInfo downloadInfo, final IProgress iProgress, final Context mContext) {
         tmp_progress = 0;
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (downloadInfo.getState() != DownLoadManager.STATE_WAITING && downloadInfo.getState() != DownLoadManager.STATE_PAUSE) {
-                    Log.e("lbb", "-----DWONLOAD--0---" + downloadInfo.getState());
-                    if (msg.arg2 == 0) {
-                        iProgress.onProgress(msg.arg1, msg.arg2, false);
-                        return;
-                    }
-                    // Log.e("lbb", "-----DWONLOAD--2---");
-                    iProgress.onProgress(msg.arg1, msg.arg2, msg.arg1 >= msg.arg2);
-                }
-            }
-        };
 
         DownLoadManager.getManager().addTask(downloadInfo, new FileRespondResult() {
             @Override
-            public void onExecuting(long progress, long total, boolean done) {
-//                Message message = new Message();
+            public void onExecuting(final long progress, final long total, boolean done) {
+//                final Message message = handler.obtainMessage();
+                if (total == 0) {
+                    return;
+                }
+                int cur_progress = (int) (((float) progress / total) * 100);
 //                message.arg1 = (int) progress;
 //                message.arg2 = (int) total;
-//                //  Log.e("lbb", "-----DWONLOAD--3---");
-//                handler.sendMessageDelayed(message, HANDER_DELAYED_TIME);
 
-                final Message message = handler.obtainMessage();
-                int cur_progress = (int) (((float)progress / total) * 100);
-                message.arg1 = (int) progress;
-                message.arg2 = (int) total;
 
-                //  Log.e("lbb", "-----DWONLOAD--3---");
-
-                if(total != 0 && cur_progress == tmp_progress){
+                if (total != 0 && cur_progress == tmp_progress) {
                     return;
                 }
 
                 tmp_progress = cur_progress;
-                if(tmp_progress >= 100){
+                if (tmp_progress >= 100) {
                     tmp_progress = 0;
                 }
 
-//                Runnable runnable = new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        handler.removeCallbacks(this);
-//                        handler.sendMessageDelayed(message,1000);
-//                    }
-//                };
-//                handler.post(runnable);
-                handler.sendMessage(message);
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (downloadInfo.getState() != DownLoadManager.STATE_WAITING && downloadInfo.getState() != DownLoadManager.STATE_PAUSE) {
+                            if (total == 0) {
+                                iProgress.onProgress(progress, total, false);
+                                return;
+                            }
+                            iProgress.onProgress(progress, total, progress >= total);
+                        }
+                    }
+                });
             }
         });
         return downloadInfo;

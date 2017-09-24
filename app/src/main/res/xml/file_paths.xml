@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-path path="YuanDwonloadLbb" name="YuanDwonloadLbb" />
-
-    <files-path path="YuanDwonloadLbb" name="YuanDwonloadLbb"/>
-<cache-path path="YuanDwonloadLbb" name="YuanDwonloadLbb"/>
-<external-path path="YuanDwonloadLbb" name="YuanDwonloadLbb"/>
-<external-files-path path="YuanDwonloadLbb" name="YuanDwonloadLbb"/>
-<external-cache-path path="YuanDwonloadLbb" name="YuanDwonloadLbb"/>
+    <external-path
+        name="external_files"
+        path="."/>
 </paths>

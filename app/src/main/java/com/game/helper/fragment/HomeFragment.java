@@ -49,7 +49,7 @@ import com.game.helper.activity.home.SearchActivity;
 import com.game.helper.activity.mine.MineSystemMsgActivity;
 import com.game.helper.adapter.home.HomeGridAdapter;
 import com.game.helper.adapter.home.MineGameAdapter;
-import com.game.helper.adapter.home.MyFragmentPagerAdapter;;
+import com.game.helper.adapter.home.MyFragmentPagerAdapter;
 import com.game.helper.adapter.home.SpecialgameAdapter;
 import com.game.helper.adapter.mall.ImagePagerAdapter;
 import com.game.helper.adapter.mall.ImagePagerAdapter.MsetV;
@@ -81,15 +81,12 @@ import com.game.helper.sdk.model.returns.QueryGameBykindAndType;
 import com.game.helper.sdk.model.returns.QueryHotWord;
 import com.game.helper.sdk.model.returns.QueryTheme.ThemeGame;
 import com.game.helper.sdk.net.base.JsonBuild;
-import com.game.helper.util.LoginUtil;
 import com.game.helper.util.SharedPreUtil;
 import com.game.helper.util.ToastUtil;
 import com.game.helper.util.Util;
 import com.game.helper.view.widget.BarrageView;
 import com.game.helper.view.widget.CircleImageView;
 import com.umeng.analytics.MobclickAgent;
-import com.yuan.leopardkit.download.DownLoadManager;
-import com.yuan.leopardkit.download.model.DownloadInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +98,8 @@ import butterknife.Unbinder;
 import cn.trinea.android.common.util.ListUtils;
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import de.greenrobot.event.EventBus;
+
+;
 
 @SuppressLint("ValidFragment")
 /**
@@ -193,16 +192,16 @@ public class HomeFragment extends BaseFragment implements MsetV {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    int count = 0;
-                    List<DownloadInfo> downloadInfosList = DownLoadManager.getManager().getDownloadInfosList();
-                    for (DownloadInfo dm : downloadInfosList) {
-                        if (dm.getDownLoadTask() != null) {
-                            if (dm.getDownLoadTask().getDownloadInfo().getState() == DownLoadManager.STATE_DOWNLOADING) {
-                                count++;
-                                break;
-                            }
-                        }
-                    }
+//                    int count = 0;
+//                    List<DownloadInfo> downloadInfosList = DownLoadManager.getManager().getDownloadInfosList();
+//                    for (DownloadInfo dm : downloadInfosList) {
+//                        if (dm.getDownLoadTask() != null) {
+//                            if (dm.getDownLoadTask().getDownloadInfo().getState() == DownLoadManager.STATE_DOWNLOADING) {
+//                                count++;
+//                                break;
+//                            }
+//                        }
+//                    }
                     break;
                 case 0x002:
                     /**
@@ -876,7 +875,7 @@ public class HomeFragment extends BaseFragment implements MsetV {
                 ((BaseActivity) getActivity()).startActivity(SearchActivity.class);
                 break;
             case R.id.tv_searcher:
-                if (SharedPreUtil.isLogin()/*(getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1*/) {//1:登录成功，0：登录失败
+                if ((getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1) {//1:登录成功，0：登录失败
                     //系统消息
                     ((BaseActivity) getActivity()).startActivity(MineSystemMsgActivity.class);
                 } else {
@@ -912,7 +911,7 @@ public class HomeFragment extends BaseFragment implements MsetV {
                 ((BaseActivity) getActivity()).startActivity(GameClassifyActivity.class);
                 break;
             case R.id.home_imageView_pic:
-                if (SharedPreUtil.isLogin()/*(getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1*/) {//1:登录成功，0：登录失败
+                if ((getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1) {//1:登录成功，0：登录失败
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.setTable(3);
                 } else {
@@ -979,7 +978,7 @@ public class HomeFragment extends BaseFragment implements MsetV {
 
     @Override
     public void onResume() {
-        new TTSThread().start();
+//        new TTSThread().start();
         isStop = false;
         super.onResume();
         MobclickAgent.onResume(mContext);
@@ -1002,7 +1001,7 @@ public class HomeFragment extends BaseFragment implements MsetV {
     }
 
     public void onEventMainThread(DownLoadModel event) {
-        if (event != null) {
+        if (event != null && getUserVisibleHint() && event.needRefreshAdapter) {
             if (BaseApplication.mInstance.isRecommendBoutiqueAdapter != 0) {
                 Log.e("lbb", "--------onEventMainThread02-------");
                 for (DownLoadModel md : mSpecialgameAdapter1.getData()) {

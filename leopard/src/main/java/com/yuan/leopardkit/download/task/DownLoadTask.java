@@ -1,13 +1,13 @@
 package com.yuan.leopardkit.download.task;
 
+import android.util.Log;
+
 import com.yuan.leopardkit.db.HttpDbUtil;
 import com.yuan.leopardkit.download.DownLoadManager;
 import com.yuan.leopardkit.download.model.DownloadInfo;
 import com.yuan.leopardkit.http.LeopardClient;
 import com.yuan.leopardkit.http.factory.DownLoadFileFactory;
 import com.yuan.leopardkit.interfaces.FileRespondResult;
-
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,12 +46,12 @@ public class DownLoadTask {
      */
     public void stop() {
         this.downloadInfo.setState(DownLoadManager.STATE_WAITING);
-        if (this.downloadInfo!=null &&this.downloadInfo.getSubscriber() != null)
+        if (this.downloadInfo != null && this.downloadInfo.getSubscriber() != null)
             this.downloadInfo.getSubscriber().unsubscribe();
-        fileRespondResult.onExecuting(0L,downloadInfo.getFileLength(),false);
-        if (this.downloadInfo.getState() != DownLoadManager.STATE_FINISH){
+        fileRespondResult.onExecuting(0L, downloadInfo.getFileLength(), false);
+        if (this.downloadInfo.getState() != DownLoadManager.STATE_FINISH) {
             resetProgress();
-            File file = new File(downloadInfo.getFileSavePath() + downloadInfo.getFileName()+fileCacheNem);
+            File file = new File(downloadInfo.getFileSavePath() + downloadInfo.getFileName() + fileCacheNem);
             if (file.exists()) file.delete();
         }
 //        if (this.downloadInfo.getState() == DownLoadManager.STATE_FINISH){
@@ -61,7 +61,7 @@ public class DownLoadTask {
 //        }
     }
 
-    public void remove(){
+    public void remove() {
         stop();
         HttpDbUtil.instance.delete(this.downloadInfo);
     }
@@ -69,38 +69,38 @@ public class DownLoadTask {
     public void pause() {
         downloadInfo.setState(DownLoadManager.STATE_PAUSE);
         downloadInfo.setBreakProgress(downloadInfo.getProgress());//记录断点位置;
-        if (this.downloadInfo!=null &&this.downloadInfo.getSubscriber() != null)
+        if (this.downloadInfo != null && this.downloadInfo.getSubscriber() != null)
             this.downloadInfo.getSubscriber().unsubscribe();
         //// TODO: 2016/8/31 更新数据库
         HttpDbUtil.instance.update(downloadInfo);
-        Log.e(TAG, "yuan----pause()----" );
+        Log.e(TAG, "yuan----pause()----");
     }
 
-    public void resume(){
+    public void resume() {
         download(false);
     }
 
-    public void reStart(){
+    public void reStart() {
         download(true);
     }
 
-    public void download( boolean isRestart) {
+    public void download(boolean isRestart) {
 
-        if (downloadInfo.getState() == DownLoadManager.STATE_DOWNLOADING)return;
+        if (downloadInfo.getState() == DownLoadManager.STATE_DOWNLOADING) return;
 
         if (downloadInfo.getState() == DownLoadManager.STATE_FINISH && !isRestart) return;
         isStart = isRestart;
         if (isRestart) {
-            if (downloadInfo.getState() == DownLoadManager.STATE_FINISH )
-            stop();
+            if (downloadInfo.getState() == DownLoadManager.STATE_FINISH)
+                stop();
             resetProgress();
             startPoints = 0L;
         }
         downloadInfo.setState(DownLoadManager.STATE_DOWNLOADING);
-      //  HttpDbUtil.instance.update(this.downloadInfo);
-        Log.e(TAG, "yuan----download----" );
+        //  HttpDbUtil.instance.update(this.downloadInfo);
+        Log.e(TAG, "yuan----download----");
         getClient().downLoadFile(this.downloadInfo, this.fileRespondResult, this);
-        
+
     }
 
 
@@ -111,11 +111,11 @@ public class DownLoadTask {
                 .build();
     }
 
-    public void writeCache(InputStream inputStream){
-        String savePath = downloadInfo.getFileSavePath() + downloadInfo.getFileName() +fileCacheNem;
+    public void writeCache(InputStream inputStream) {
+        String savePath = downloadInfo.getFileSavePath() + downloadInfo.getFileName() + fileCacheNem;
         File file = new File(savePath);
-        if (isStart){//如果是重新下载
-            if (file.exists()){
+        if (isStart) {//如果是重新下载
+            if (file.exists()) {
                 file.delete();
             }
             isStart = false;
@@ -125,14 +125,14 @@ public class DownLoadTask {
         try {
             randomAccessFile = new RandomAccessFile(file, "rwd");
             channelOut = randomAccessFile.getChannel();
-            MappedByteBuffer mappedBuffer = channelOut.map(FileChannel.MapMode.READ_WRITE, downloadInfo.getBreakProgress(), downloadInfo.getFileLength()-downloadInfo.getBreakProgress());
+            MappedByteBuffer mappedBuffer = channelOut.map(FileChannel.MapMode.READ_WRITE, downloadInfo.getBreakProgress(), downloadInfo.getFileLength() - downloadInfo.getBreakProgress());
             byte[] buffer = new byte[1024];
             int len;
             int record = 0;
             while ((len = inputStream.read(buffer)) != -1) {
                 mappedBuffer.put(buffer, 0, len);
                 record += len;
-              //  Log.e(TAG, "yuan----len----" +len );
+                //  Log.e(TAG, "yuan----len----" +len );
             }
 
             try {
@@ -161,26 +161,27 @@ public class DownLoadTask {
         HttpDbUtil.instance.update(downloadInfo);
 
         //更新文件
-        File file = new File(downloadInfo.getFileSavePath() + downloadInfo.getFileName() +fileCacheNem);
+        File file = new File(downloadInfo.getFileSavePath() + downloadInfo.getFileName() + fileCacheNem);
         file.renameTo(new File(downloadInfo.getFileSavePath() + downloadInfo.getFileName()));
         fileRespondResult.onSuccess("");
     }
 
-    private void resetProgress(){
+    private void resetProgress() {
         this.downloadInfo.setBreakProgress(0L);
         this.downloadInfo.setProgress(0L);
         this.downloadInfo.setFileLength(0L);
     }
 
-	public DownloadInfo getDownloadInfo() {
-		return downloadInfo;
-	}
+    public DownloadInfo getDownloadInfo() {
+        return downloadInfo;
+    }
 
-	public void setDownloadInfo(DownloadInfo downloadInfo) {
-		this.downloadInfo = downloadInfo;
-	}
-	public void setState(int state){
-		 downloadInfo.setState(state);
-		 HttpDbUtil.instance.update(downloadInfo);
-	}
+    public void setDownloadInfo(DownloadInfo downloadInfo) {
+        this.downloadInfo = downloadInfo;
+    }
+
+    public void setState(int state) {
+        downloadInfo.setState(state);
+        HttpDbUtil.instance.update(downloadInfo);
+    }
 }

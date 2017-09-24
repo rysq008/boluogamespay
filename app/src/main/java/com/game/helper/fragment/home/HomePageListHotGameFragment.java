@@ -1,7 +1,5 @@
 package com.game.helper.fragment.home;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +19,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
 public class HomePageListHotGameFragment extends BaseFragment {
@@ -45,7 +42,7 @@ public class HomePageListHotGameFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mmSpecialgameAdapter2List=getArguments().getParcelableArrayList("mList");
+        this.mmSpecialgameAdapter2List = getArguments().getParcelableArrayList("mList");
     }
 
     @Override
@@ -59,14 +56,14 @@ public class HomePageListHotGameFragment extends BaseFragment {
         return view;
     }
 
-    public static final HomePageListHotGameFragment newInstance(ArrayList<AppContent> mmSpecialgameAdapter2List ) {
-        HomePageListHotGameFragment listfragment=new HomePageListHotGameFragment();
+    public static final HomePageListHotGameFragment newInstance(ArrayList<AppContent> mmSpecialgameAdapter2List) {
+        HomePageListHotGameFragment listfragment = new HomePageListHotGameFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList("mList",mmSpecialgameAdapter2List);
+        args.putParcelableArrayList("mList", mmSpecialgameAdapter2List);
         listfragment.setArguments(args);
         return listfragment;
     }
-    
+
     @Override
     protected void initViews() {
 
@@ -98,7 +95,7 @@ public class HomePageListHotGameFragment extends BaseFragment {
     }
 
     public void onEventMainThread(DownLoadModel event) {
-        if (event != null) {
+        if (event != null && getUserVisibleHint() && event.needRefreshAdapter) {
             if (BaseApplication.mInstance.isRecommendBoutiqueAdapter != 0) {
 
                 for (DownLoadModel md : mSpecialgameAdapter.getData()) {

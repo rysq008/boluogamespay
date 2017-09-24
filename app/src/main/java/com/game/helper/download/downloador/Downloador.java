@@ -175,11 +175,12 @@ public class Downloador {
 	public void intentInstall(){
 		// 下载完成后弹出安装窗
 		File file = new File(downloadPath + File.separator + appContent.gameName+ ".apk");
-		Intent intentInstall = new Intent();
-		intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intentInstall.setAction(Intent.ACTION_VIEW);
-		intentInstall.setDataAndType(Uri.fromFile(file), ACTION_INSTALL);
-		context.startActivity(intentInstall);
+//		Intent intentInstall = new Intent();
+//		intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		intentInstall.setAction(Intent.ACTION_VIEW);
+//		intentInstall.setDataAndType(Uri.fromFile(file), ACTION_INSTALL);
+//		context.startActivity(intentInstall);
+        com.game.helper.util.FileUtil.apkInstall(file,context);
 	}
 	/**
 	 * 将已下载大小归零
