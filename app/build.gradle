@@ -106,6 +106,6 @@ dependencies {
     compile 'com.github.hotchemi:permissionsdispatcher:2.1.2'
     apt "com.github.hotchemi:permissionsdispatcher-processor:2.1.2"
     compile files('libs/org.apache.http.legacy.jar')
-    compile 'zlc.season:rxdownload2:2.0.4'
-    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.8.2@aar'
+//    compile 'zlc.season:rxdownload2:2.0.4'
+//    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.8.2@aar'
 }

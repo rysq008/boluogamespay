@@ -99,7 +99,7 @@ public class LeopardHttp {
                 if (total == 0) {
                     return;
                 }
-                int cur_progress = (int) (((float) progress / total) * 100);
+                int cur_progress = (int) (((float) progress / total) * 1000);
 //                message.arg1 = (int) progress;
 //                message.arg2 = (int) total;
 
@@ -109,7 +109,7 @@ public class LeopardHttp {
                 }
 
                 tmp_progress = cur_progress;
-                if (tmp_progress >= 100) {
+                if (tmp_progress >= 1000) {
                     tmp_progress = 0;
                 }
 

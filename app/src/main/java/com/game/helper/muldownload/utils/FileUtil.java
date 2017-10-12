@@ -324,7 +324,8 @@ public class FileUtil {
 		try {
 			is = new BufferedInputStream(new FileInputStream(src));
 			os = new BufferedOutputStream(new FileOutputStream(dest));
-			byte[] b = new byte[256];
+//			byte[] b = new byte[256];
+			byte[] b = new byte[51200];
 			int len = 0;
 			try {
 				while ((len = is.read(b)) != -1) {

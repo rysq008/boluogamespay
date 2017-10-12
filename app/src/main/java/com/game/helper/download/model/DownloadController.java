@@ -3,8 +3,8 @@ package com.game.helper.download.model;
 import android.widget.Button;
 import android.widget.TextView;
 
-import zlc.season.rxdownload2.entity.DownloadEvent;
-import zlc.season.rxdownload2.entity.DownloadFlag;
+//import zlc.season.rxdownload2.entity.DownloadEvent;
+//import zlc.season.rxdownload2.entity.DownloadFlag;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -27,33 +27,33 @@ public class DownloadController {
         mState = state;
         mState.setText(mStatus, mAction);
     }
-
-    public void setEvent(DownloadEvent event) {
-        int flag = event.getFlag();
-        switch (flag) {
-            case DownloadFlag.NORMAL:
-                setState(new DownloadController.Normal());
-                break;
-            case DownloadFlag.WAITING:
-                setState(new DownloadController.Waiting());
-                break;
-            case DownloadFlag.STARTED:
-                setState(new DownloadController.Started());
-                break;
-            case DownloadFlag.PAUSED:
-                setState(new DownloadController.Paused());
-                break;
-            case DownloadFlag.COMPLETED:
-                setState(new DownloadController.Completed());
-                break;
-            case DownloadFlag.FAILED:
-                setState(new DownloadController.Failed());
-                break;
-            case DownloadFlag.DELETED:
-                setState(new DownloadController.Deleted());
-                break;
-        }
-    }
+//
+//    public void setEvent(DownloadEvent event) {
+//        int flag = event.getFlag();
+//        switch (flag) {
+//            case DownloadFlag.NORMAL:
+//                setState(new DownloadController.Normal());
+//                break;
+//            case DownloadFlag.WAITING:
+//                setState(new DownloadController.Waiting());
+//                break;
+//            case DownloadFlag.STARTED:
+//                setState(new DownloadController.Started());
+//                break;
+//            case DownloadFlag.PAUSED:
+//                setState(new DownloadController.Paused());
+//                break;
+//            case DownloadFlag.COMPLETED:
+//                setState(new DownloadController.Completed());
+//                break;
+//            case DownloadFlag.FAILED:
+//                setState(new DownloadController.Failed());
+//                break;
+//            case DownloadFlag.DELETED:
+//                setState(new DownloadController.Deleted());
+//                break;
+//        }
+//    }
 
     public void handleClick(Callback callback) {
         mState.handleClick(callback);

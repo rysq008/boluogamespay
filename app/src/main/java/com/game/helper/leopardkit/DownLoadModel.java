@@ -3,8 +3,8 @@ package com.game.helper.leopardkit;
 import com.game.helper.download.bean.AppContent;
 import com.yuan.leopardkit.download.model.DownloadInfo;
 
-import io.reactivex.disposables.Disposable;
-import zlc.season.rxdownload2.entity.DownloadRecord;
+//import io.reactivex.disposables.Disposable;
+//import zlc.season.rxdownload2.entity.DownloadRecord;
 
 /**
  * 
@@ -14,8 +14,8 @@ public class DownLoadModel {
 
     private DownloadInfo info;
     private AppContent mAppContent;
-    public Disposable disposable;
-    public DownloadRecord record;
+//    public Disposable disposable;
+//    public DownloadRecord record;
     public boolean needRefreshAdapter = true;
 
 

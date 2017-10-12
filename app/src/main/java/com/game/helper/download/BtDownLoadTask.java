@@ -55,15 +55,18 @@ public class BtDownLoadTask extends Thread {
             finished += info.getFinished();
             if (connection.getResponseCode() == 206) {//文件部分下载，返回码为206
                 InputStream is = connection.getInputStream();
-                byte[] buffer = new byte[1024 * 4];
+//                byte[] buffer = new byte[1024 * 4];
+                byte[] buffer = new byte[1024 * 50];
                 int len;
+
                 while ((len = is.read(buffer)) != -1) {
                     //写入文件
                     rwd.write(buffer, 0, len);
                     finished += len;
                     info.setFinished(finished);
                     //更新界面显示
-                    Message msg = new Message();
+//                    Message msg = new Message();
+                    Message msg = handler.obtainMessage();
                     msg.what = 0x123;
                     msg.arg1 = info.getLength();
                     msg.arg2 = info.getFinished();

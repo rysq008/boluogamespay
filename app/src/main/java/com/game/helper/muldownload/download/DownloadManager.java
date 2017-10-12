@@ -434,7 +434,7 @@ public class DownloadManager implements CommValues{
 			fos.seek(borkenLength);
 			bis = new BufferedInputStream(con.getInputStream());
 
-			byte[] buffer = new byte[1024];
+			byte[] buffer = new byte[51200];
 
 			int len = 0;
 			int time = 0;
@@ -564,7 +564,7 @@ public class DownloadManager implements CommValues{
 				return;
 			}
 			fos = new FileOutputStream(file);
-			byte[] buffer = new byte[1024];
+			byte[] buffer = new byte[51200];
 			int times = 0;
 			int len = 0;
 			int loadedLength = 0;
