@@ -1,7 +1,7 @@
 package com.game.helper.download.model;
 
-import io.reactivex.disposables.Disposable;
-import zlc.season.rxdownload2.entity.DownloadRecord;
+//import io.reactivex.disposables.Disposable;
+//import zlc.season.rxdownload2.entity.DownloadRecord;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -10,7 +10,7 @@ import zlc.season.rxdownload2.entity.DownloadRecord;
  * FIXME
  */
 public class DownloadItem {
-	public Disposable disposable;
-	public DownloadRecord record;
+//	public Disposable disposable;
+//	public DownloadRecord record;
 
 }

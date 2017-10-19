@@ -124,13 +124,16 @@ public class DownLoadTask {
         RandomAccessFile randomAccessFile = null;
         try {
             randomAccessFile = new RandomAccessFile(file, "rwd");
-            channelOut = randomAccessFile.getChannel();
-            MappedByteBuffer mappedBuffer = channelOut.map(FileChannel.MapMode.READ_WRITE, downloadInfo.getBreakProgress(), downloadInfo.getFileLength() - downloadInfo.getBreakProgress());
-            byte[] buffer = new byte[1024];
+            long l = randomAccessFile.length();
+            randomAccessFile.seek(l);
+//            channelOut = randomAccessFile.getChannel();
+//            MappedByteBuffer mappedBuffer = channelOut.map(FileChannel.MapMode.READ_WRITE, downloadInfo.getBreakProgress(), downloadInfo.getFileLength() - downloadInfo.getBreakProgress());
+            byte[] buffer = new byte[51200];
             int len;
             int record = 0;
             while ((len = inputStream.read(buffer)) != -1) {
-                mappedBuffer.put(buffer, 0, len);
+//                mappedBuffer.put(buffer, 0, len);
+                randomAccessFile.write(buffer,0,len);
                 record += len;
                 //  Log.e(TAG, "yuan----len----" +len );
             }

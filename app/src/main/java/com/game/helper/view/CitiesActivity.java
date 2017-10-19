@@ -247,7 +247,7 @@ public class CitiesActivity extends BaseActivity implements OnWheelChangedListen
 			StringBuffer sb = new StringBuffer();
 			InputStream is = getAssets().open("city.json");
 			int len = -1;
-			byte[] buf = new byte[1024];
+			byte[] buf = new byte[51200];
 			while ((len = is.read(buf)) != -1) {
 				sb.append(new String(buf, 0, len, "utf-8"));
 			}

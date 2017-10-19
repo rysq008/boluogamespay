@@ -176,8 +176,9 @@ public class SystemUtil {
 		try{  
 			String path="sys/class/net/eth0/address";  
 			FileInputStream fis_name = new FileInputStream(path);  
-			byte[] buffer_name = new byte[1024*8];  
-			int byteCount_name = fis_name.read(buffer_name);  
+//			byte[] buffer_name = new byte[1024*8];
+			byte[] buffer_name = new byte[1024*50];
+			int byteCount_name = fis_name.read(buffer_name);
 			if(byteCount_name>0)  
 			{  
 				mac = new String(buffer_name, 0, byteCount_name, "utf-8");  
@@ -186,8 +187,9 @@ public class SystemUtil {
 			if(mac.length()==0||mac==null){  
 				path="sys/class/net/eth0/wlan0";  
 				FileInputStream fis = new FileInputStream(path);  
-				byte[] buffer = new byte[1024*8];  
-				int byteCount = fis.read(buffer);  
+//				byte[] buffer = new byte[1024*8];
+				byte[] buffer = new byte[1024*50];
+				int byteCount = fis.read(buffer);
 				if(byteCount>0)  
 				{  
 					mac = new String(buffer, 0, byteCount, "utf-8");  

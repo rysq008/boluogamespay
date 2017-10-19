@@ -120,7 +120,7 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
             //从文件的size以后的位置开始写入
             fos.seek(beginPosition);
 
-            byte buffer [] = new byte[1024];
+            byte buffer [] = new byte[51200];
             int inputSize = -1;
             while((inputSize = is.read(buffer)) != -1) {
                 fos.write(buffer, 0, inputSize);
