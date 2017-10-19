@@ -46,6 +46,7 @@ import com.game.helper.activity.home.GameThemeDetailsActivity;
 import com.game.helper.activity.home.RankingListActivity;
 import com.game.helper.activity.home.RechargeActivity;
 import com.game.helper.activity.home.SearchActivity;
+import com.game.helper.activity.mine.MineDataEditingActivity;
 import com.game.helper.activity.mine.MineSystemMsgActivity;
 import com.game.helper.adapter.home.HomeGridAdapter;
 import com.game.helper.adapter.home.MineGameAdapter;
@@ -875,12 +876,12 @@ public class HomeFragment extends BaseFragment implements MsetV {
                 ((BaseActivity) getActivity()).startActivity(SearchActivity.class);
                 break;
             case R.id.tv_searcher:
-                if ((getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1) {//1:登录成功，0：登录失败
-                    //系统消息
+//                if ((getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1) {//1:登录成功，0：登录失败
+//                    //系统消息
                     ((BaseActivity) getActivity()).startActivity(MineSystemMsgActivity.class);
-                } else {
-                    ((BaseActivity) getActivity()).startActivity(LoginActivity.class);
-                }
+//                } else {
+//                    ((BaseActivity) getActivity()).startActivity(LoginActivity.class);
+//                }
 
                 break;
             case R.id.relat_ThemeGame:
@@ -911,13 +912,14 @@ public class HomeFragment extends BaseFragment implements MsetV {
                 ((BaseActivity) getActivity()).startActivity(GameClassifyActivity.class);
                 break;
             case R.id.home_imageView_pic:
-                if ((getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1) {//1:登录成功，0：登录失败
-                    MainActivity mainActivity = (MainActivity) getActivity();
-                    mainActivity.setTable(3);
-                } else {
-                    ((BaseActivity) getActivity()).startActivity(LoginActivity.class);
-                }
-
+//                if ((getActivity().getIntent().getIntExtra(KEY_FIRSTUSER, 0)) == 1) {//1:登录成功，0：登录失败
+//                    MainActivity mainActivity = (MainActivity) getActivity();
+//                    mainActivity.setTable(3);
+//                } else {
+//                    ((BaseActivity) getActivity()).startActivity(LoginActivity.class);
+//                }
+                //个人信息和头像设置
+                ((BaseActivity) getActivity()).startActivity(MineDataEditingActivity.class);
                 break;
 
             default:
