@@ -3,26 +3,30 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'android-apt'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'g9'
+            keyPassword '123456'
+            storeFile file('F:/workplace/G9YX/g9market/tools/keys/g9gameplayer.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion '25.0.3'
     useLibrary 'org.apache.http.legacy'
-
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
-
     lintOptions {
         disable 'MissingTranslation'
     }
-
     defaultConfig {
         applicationId "com.game.helper"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 11
-        versionName "2.0.3"
+        versionCode 13
+        versionName "2.0.5"
         multiDexEnabled true
     }
-
     allprojects {
         repositories {
             mavenCentral()
@@ -37,7 +41,6 @@ android {
             debuggable true
         }
     }
-
     productFlavors {
         /*huawei c360 baidu yingyongbao ppzhushou meizu xiaomi pc h5*/
         huawei {}
@@ -57,7 +60,6 @@ android {
 }
 
 dependencies {
-
     /*compile fileTree(include: ['*.jar'], dir: 'libs')*/
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

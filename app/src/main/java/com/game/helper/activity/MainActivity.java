@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (null != grantResults && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //ToastUtil.showToast(MainActivity.this, "您允许储存权限");
             } else {
                 ToastUtil.showToast(MainActivity.this, "为了更好的体验，请您打开储存的权限，否则会下载不了游戏");

@@ -1,13 +1,19 @@
 package com.game.helper.pic;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,6 +26,7 @@ import android.widget.ToggleButton;
 import com.game.helper.BaseActivity;
 import com.game.helper.BaseApplication;
 import com.game.helper.R;
+import com.game.helper.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +44,7 @@ import butterknife.OnClick;
  * @QQ:595163260
  */
 public class AlbumActivity extends BaseActivity {
+    private static final int CODE_FOR_WRITE_PERMISSION = 0x1000;
     @BindView(R.id.topLeftBack)
     ImageView topLeftBack;
     @BindView(R.id.top_title)
@@ -136,7 +144,7 @@ public class AlbumActivity extends BaseActivity {
     }
 
     // 返回按钮监听
-	/*private class BackListener implements OnClickListener {
+    /*private class BackListener implements OnClickListener {
 		public void onClick(View v) {
 			intent.setClass(AlbumActivity.this, ImageFile.class);
 			startActivity(intent);
@@ -157,6 +165,13 @@ public class AlbumActivity extends BaseActivity {
         helper = AlbumHelper.getHelper();
         helper.init(getApplicationContext());
 
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    CODE_FOR_WRITE_PERMISSION);
+            ToastUtil.showToast(this,"打开相册访问权限！！");
+            return;
+        }
         contentList = helper.getImagesBucketList(false);
         dataList = new ArrayList<ImageItem>();
         for (int i = 0; i < contentList.size(); i++) {
@@ -180,6 +195,49 @@ public class AlbumActivity extends BaseActivity {
         okButton = (Button) findViewById(R.id.ok_button);
         okButton.setText("完成(" + (Bimp.cur + Bimp.tempSelectBitmap.size())
                 + "/" + BaseApplication.mInstance.num + ")");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        if (requestCode == CODE_FOR_WRITE_PERMISSION) {
+//            if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                //用户同意使用write
+//                startGetImageThread();
+//            } else {
+//                //用户不同意，自行处理即可
+//                finish();
+//            }
+//        }
+        if (requestCode == CODE_FOR_WRITE_PERMISSION){
+            if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                //用户同意使用write
+//                startGetImageThread();
+                initss();
+            }else{
+                //用户不同意，向用户展示该权限作用
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    AlertDialog dialog = new AlertDialog.Builder(this)
+                            .setMessage("该相册需要赋予访问存储的权限，不开启将无法正常工作！")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            }).create();
+                    dialog.show();
+                    return;
+                }
+                finish();
+            }
+        }
     }
 
     private void initListener() {

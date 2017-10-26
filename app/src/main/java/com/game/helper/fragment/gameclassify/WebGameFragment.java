@@ -96,7 +96,9 @@ public class WebGameFragment extends BaseFragment implements PullToRefreshLayout
         new QueryGameBykindAndTypeTask(getActivity(), typeId, kindId, orderby, offset + "", new BaseBBXTask.Back() {
             @Override
             public void success(Object object, String msg) {
-                gameWebRefreshView.refreshFinish(PullToRefreshLayout.SUCCEED);
+                if (null != gameWebRefreshView) {
+                    gameWebRefreshView.refreshFinish(PullToRefreshLayout.SUCCEED);
+                }
                 if (object != null && object instanceof QueryGameBykindAndType) {
                     QueryGameBykindAndType mData = (QueryGameBykindAndType) object;
                     if (mData.data != null && mData.data.size() >= 0) {

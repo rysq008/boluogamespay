@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,7 +21,6 @@ import com.game.helper.BaseActivity;
 import com.game.helper.BaseApplication;
 import com.game.helper.BaseFragment;
 import com.game.helper.R;
-import com.game.helper.activity.home.CollarDiscountNumberActivity;
 import com.game.helper.activity.home.GameDetailActivity;
 import com.game.helper.activity.home.PaySelectActivity;
 import com.game.helper.activity.home.SelectGameNoActivity;
@@ -47,7 +45,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 @SuppressLint("ValidFragment")
 /**
@@ -171,8 +168,8 @@ public class RechargeFragment extends BaseFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (TextUtils.isEmpty(orderType_zk)){
-                    ToastUtil.showToast(getActivity(),"请选择账号");
+                if (TextUtils.isEmpty(orderType_zk)) {
+                    ToastUtil.showToast(getActivity(), "请选择账号");
                     ed_Num1.setText("");
                     return;
                 }
@@ -209,8 +206,8 @@ public class RechargeFragment extends BaseFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (TextUtils.isEmpty(orderType_zk)){
-                    ToastUtil.showToast(getActivity(),"请选择账号");
+                if (TextUtils.isEmpty(orderType_zk)) {
+                    ToastUtil.showToast(getActivity(), "请选择账号");
                     ed_Num1.setText("");
                     return;
                 }
@@ -224,32 +221,32 @@ public class RechargeFragment extends BaseFragment {
                         bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
                         sn2 = bd.doubleValue();
 
-                        if (zknumber<=0){
+                        if (zknumber <= 0) {
 
                             sn1 = sn2;
-                        }else{
-                            sn1 = sn2 *zknumber;
+                        } else {
+                            sn1 = sn2 * zknumber;
 
                         }
                         bd = new BigDecimal(sn1);
                         bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
                         //sn1=bd.doubleValue();
-                        gameDataleRechargePaymoneyTv.setText(bd.toString()+"");
+                        gameDataleRechargePaymoneyTv.setText(bd.toString() + "");
 
                         bd = new BigDecimal(sn2 - sn1);
                         bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
                         sn1 = bd.doubleValue();
-                        gameDataleRechargeSavemoneyTv.setText(sn1+"");
+                        gameDataleRechargeSavemoneyTv.setText(sn1 + "");
 
                     }
                 } else {
                     double sn2 = 0;
-                    if (zknumber<=0){
+                    if (zknumber <= 0) {
                         sn1 = sn2;
-                    }else{
+                    } else {
                         sn1 = sn2 * zknumber;
                     }
-                    gameDataleRechargeSavemoneyTv.setText((sn2 - sn1)+"");
+                    gameDataleRechargeSavemoneyTv.setText((sn2 - sn1) + "");
                     gameDataleRechargePaymoneyTv.setText("" + sn1);
                 }
             }
@@ -270,7 +267,9 @@ public class RechargeFragment extends BaseFragment {
                 if (ACTION_SelectGameNNo.equals(action)) {
                     mAccount = (Account) BaseApplication.mInstance.get(KEY_SelectGameNNo);
                     if (mAccount != null) {
-                        ed_Num1.setText(mAccount.gameAccount);
+                        if (!TextUtils.isEmpty(mAccount.gameAccount)) {
+                            ed_Num1.setText(mAccount.gameAccount);
+                        }
                         //ed_Num1.setSelection(ed_Num1.getText().length());//移动光标
                         gameDataleRechargePaymoneyTv.setText("0.00");
                         gameDataleRechargeSavemoneyTv.setText("0.00");
@@ -285,7 +284,7 @@ public class RechargeFragment extends BaseFragment {
                     }
                 }
 
-                getRechargeWay(selAppContent.gameId, mAccount.gameAccount);
+                getRechargeWay(null == selAppContent.gameId ? "" : selAppContent.gameId, TextUtils.isEmpty(mAccount.gameAccount) ? "" : mAccount.gameAccount);
                 //ed_Num1.setFocusable(false);
             }
 
@@ -300,11 +299,12 @@ public class RechargeFragment extends BaseFragment {
 
     /**
      * 根据账号id 游戏id得到首充还是续充
+     *
      * @param gameId
      * @param gameAccount
      */
     private void getRechargeWay(String gameId, String gameAccount) {
-        new GetRechargeWayTask(getActivity(), gameId, gameAccount,user.userId, new Back() {
+        new GetRechargeWayTask(getActivity(), gameId, gameAccount, user.userId, new Back() {
 
             @Override
             public void success(Object object, String msg) {
@@ -316,11 +316,11 @@ public class RechargeFragment extends BaseFragment {
                         //折扣
                         orderType_zk = getrechargemodel.data.zk;
 
-                        recharge_fragment_zk_tv.setText(orderType_zk+"折");//折扣显示
+                        recharge_fragment_zk_tv.setText(orderType_zk + "折");//折扣显示
 
                         zknumber = Double.parseDouble(orderType_zk) / 10.0f;
 
-                        if (!TextUtils.isEmpty(orderType)){
+                        if (!TextUtils.isEmpty(orderType)) {
                             rehcargeFragmentXcscTv.setVisibility(View.VISIBLE);
                             if (orderType.equals("sc")) {
                                 rehcargeFragmentXcscTv.setText("首充");
@@ -365,10 +365,10 @@ public class RechargeFragment extends BaseFragment {
                     bundle.putString("money", "" + count1);
                     //bundle.putString("card", "0");//
 
-                    String savemoney="" +Double.parseDouble((TextUtils.isEmpty(gameDataleRechargeSavemoneyTv.getText().toString()) ? "0" : gameDataleRechargeSavemoneyTv.getText().toString()));
+                    String savemoney = "" + Double.parseDouble((TextUtils.isEmpty(gameDataleRechargeSavemoneyTv.getText().toString()) ? "0" : gameDataleRechargeSavemoneyTv.getText().toString()));
                     bundle.putString("saveMoney", savemoney);
 
-                    String realPay=""+Double.parseDouble((TextUtils.isEmpty(gameDataleRechargePaymoneyTv.getText().toString()) ? "0" : gameDataleRechargePaymoneyTv.getText().toString()));
+                    String realPay = "" + Double.parseDouble((TextUtils.isEmpty(gameDataleRechargePaymoneyTv.getText().toString()) ? "0" : gameDataleRechargePaymoneyTv.getText().toString()));
                     bundle.putString("realPay", realPay);
 
                     GameDetailActivity gameDetailActivity = (GameDetailActivity) getActivity();

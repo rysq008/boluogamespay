@@ -1,10 +1,13 @@
 package com.game.helper.activity.mine;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -107,7 +110,7 @@ public class MineSetingActivity extends BaseActivity {
         }
 
 		/*
-		iv_Open.setImageResource(R.drawable.wode_77);
+        iv_Open.setImageResource(R.drawable.wode_77);
 		isOpen=true;
 		//获取声音管理器：
 		AudioManager audioManager = (AudioManager) this.getSystemService(AUDIO_SERVICE);
@@ -252,6 +255,13 @@ public class MineSetingActivity extends BaseActivity {
     //即有声音也有振动
     @SuppressWarnings("deprecation")
     public void ringAndVibrate(AudioManager audio, int tag) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= 24
+                && !notificationManager.isNotificationPolicyAccessGranted()) {
+            Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+            getApplicationContext().startActivity(intent);
+            return;
+        }
         audio.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
         audio.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,
                 AudioManager.VIBRATE_SETTING_ON);
@@ -265,6 +275,13 @@ public class MineSetingActivity extends BaseActivity {
     //只能振动：
     @SuppressWarnings("deprecation")
     public void vibrate(AudioManager audio, int tag) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= 24
+                && !notificationManager.isNotificationPolicyAccessGranted()) {
+            Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+            getApplicationContext().startActivity(intent);
+            return;
+        }
         audio.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
         audio.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,
                 AudioManager.VIBRATE_SETTING_ON);
@@ -278,6 +295,13 @@ public class MineSetingActivity extends BaseActivity {
     //无声无振动：
     @SuppressWarnings("deprecation")
     public void noRingAndVibrate(AudioManager audio) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= 24
+                && !notificationManager.isNotificationPolicyAccessGranted()) {
+            Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+            getApplicationContext().startActivity(intent);
+            return;
+        }
         audio.setRingerMode(AudioManager.RINGER_MODE_SILENT);
         audio.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,
                 AudioManager.VIBRATE_SETTING_OFF);
