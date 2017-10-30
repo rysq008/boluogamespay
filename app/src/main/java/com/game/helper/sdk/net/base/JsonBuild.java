@@ -1,38 +1,34 @@
 
 package com.game.helper.sdk.net.base;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.R.integer;
-import android.provider.ContactsContract.Contacts.Data;
 import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.JsonReader;
+
+import org.json.JSONObject;
+
+import java.io.StringReader;
+import java.lang.reflect.Type;
 
 /**
  * @Description
- 
  */
 public class JsonBuild {
 
-	public Object object;
-	public JSONObject jsonObject;
-	
-	public boolean islocEncrypt=false;//是否本地加密
+    public Object object;
+    public JSONObject jsonObject;
 
-	public JsonBuild setModel(Object object) {
-		this.object = object;		
-		return this;
-	}
-	
-	/**设置实体*//*
-	public JSONObject getJsonObject() {
+    public boolean islocEncrypt = false;//是否本地加密
+
+    public JsonBuild setModel(Object object) {
+        this.object = object;
+        return this;
+    }
+
+    /**设置实体*//*
+    public JSONObject getJsonObject() {
 		if (object != null) {
 			try {
 				return changeJson(object,true);
@@ -44,104 +40,110 @@ public class JsonBuild {
 		}
 		return null;
 	}*/
-	/** 是否本地加密 */
-	public JsonBuild islocEncrypt(boolean islocEncrypt) {
-		this.islocEncrypt = islocEncrypt;
-		return this;
-	}
-	
+
+    /**
+     * 是否本地加密
+     */
+    public JsonBuild islocEncrypt(boolean islocEncrypt) {
+        this.islocEncrypt = islocEncrypt;
+        return this;
+    }
+
 	/*public String getJson() {
-		return getJsonStr(true);
+        return getJsonStr(true);
 	}*/
 //	public String getJsonZero() {
 //		return getJsonStr(false);
 //	}
-	
-	public String getJson1() {
-		try {
-			return getJsonStr1(true);
-		} catch (JsonSyntaxException e) {
-			e.printStackTrace();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "";
-		
-	}
-	public String getJson2() {
-		return getJsonStr1(false);
-	}
-	
-	
-	
-	public String getJsonStr1(boolean isCode){
-		JSONObject jsonObject;
-		try {
-			 Gson gson=new Gson();
-             // String obj=gson.toJson(object);
-			 //jsonObject = new JSONObject(object.toString());
-			 String json =gson.toJson(object);
-			if (json != null){
-				//String json = jsonObject.toString();
-				Log.e("xxx","提交的json:"+json);
-				if(json != null) {
-					/*if(isCode){
-						return islocEncrypt?SDK.aesEncrypt(json):SDK.encrypt(json);
+
+    public String getJson1() {
+        try {
+            return getJsonStr1(true);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+
+    }
+
+    public String getJson2() {
+        return getJsonStr1(false);
+    }
+
+
+    public String getJsonStr1(boolean isCode) {
+        JSONObject jsonObject;
+        try {
+            Gson gson = new Gson();
+            // String obj=gson.toJson(object);
+            //jsonObject = new JSONObject(object.toString());
+            String json = gson.toJson(object);
+            if (json != null) {
+                //String json = jsonObject.toString();
+                Log.e("xxx", "提交的json:" + json);
+                if (json != null) {
+                    /*if(isCode){
+                        return islocEncrypt?SDK.aesEncrypt(json):SDK.encrypt(json);
 					}else{
 						return json;
 					}*/
-					return json;
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return "";
-	}
-	/*public String getJsonStr(boolean isCode){
-		JSONObject jsonObject = getJsonObject();
-		if (jsonObject != null){
-			String json = jsonObject.toString();
-			Log.e("xxx","提交的json:"+json);
-			if(json != null){
-				if(isCode){
-					return islocEncrypt?SDK.aesEncrypt(json):SDK.encrypt(json);
-				}else{
-					return json;
-				}
-				return json;
-			}
-		}
-		return "";
-	}*/
-	public String getJsonString1(){
-		return getJsonStr1(false);
-	}
-	/*public String getJsonString(){
+                    return json;
+                }
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    /*public String getJsonStr(boolean isCode){
+        JSONObject jsonObject = getJsonObject();
+        if (jsonObject != null){
+            String json = jsonObject.toString();
+            Log.e("xxx","提交的json:"+json);
+            if(json != null){
+                if(isCode){
+                    return islocEncrypt?SDK.aesEncrypt(json):SDK.encrypt(json);
+                }else{
+                    return json;
+                }
+                return json;
+            }
+        }
+        return "";
+    }*/
+    public String getJsonString1() {
+        return getJsonStr1(false);
+    }
+    /*public String getJsonString(){
 		return getJsonStr(false);
 	}*/
-	
-	public Object getData(Type type,String json) {
-		if (json != null) {
-			Gson gson = new Gson();
-			return gson.fromJson(json, type);
-		}
-		return null;
-	}
-	/**
-	 * 
-	* @Title:       changeJson
-	* @param        @param object:出入的数据
-	* @param        @param flag:true表示第一次传入，flase:表示同一串数据中调用第二次或者是多次
-	* @param        @return      
-	* @return       JSONObject    返回类型
-	* @throws
-	* @author       lulinhua
-	* @date         2016-3-21 上午10:49:22
-	* @Description: TODO ：加入flag主要是解决传输过程中每个类继承了基类后都讲基类的参数加入其中
-	 */
+
+    public Object getData(Type type, String json) {
+        if (json != null) {
+            JsonReader jsonReader = new JsonReader(new StringReader(json));
+            jsonReader.setLenient(true);
+            Gson gson = new Gson();
+            return gson.fromJson(json, type);
+        }
+        return null;
+    }
+    /**
+     *
+     * @Title: changeJson
+     * @param        @param object:出入的数据
+     * @param        @param flag:true表示第一次传入，flase:表示同一串数据中调用第二次或者是多次
+     * @param        @return
+     * @return JSONObject    返回类型
+     * @throws
+     * @author lulinhua
+     * @date 2016-3-21 上午10:49:22
+     * @Description: TODO ：加入flag主要是解决传输过程中每个类继承了基类后都讲基类的参数加入其中
+     */
 	/*public JSONObject changeJson(Object object,boolean flag)     {
 		JSONObject jb = null;
 		
@@ -224,16 +226,16 @@ public class JsonBuild {
 	}
 	
 	*//**
-	 * 
-	* @Title:       changeJson
-	* @param        @param object:出入的数据
-	* @param        @return      
-	* @return       JSONObject    返回类型
-	* @throws
-	* @author       lulinhua
-	* @date         2016-3-21 上午10:49:22
-	* @Description: TODO ：加入flag主要是解决传输过程中每个类继承了基类后都讲基类的参数加入其中
-	 *//*
+     *
+     * @Title: changeJson
+     * @param        @param object:出入的数据
+     * @param        @return
+     * @return JSONObject    返回类型
+     * @throws
+     * @author lulinhua
+     * @date 2016-3-21 上午10:49:22
+     * @Description: TODO ：加入flag主要是解决传输过程中每个类继承了基类后都讲基类的参数加入其中
+     *//*
 	public JSONObject changeJson(Object object)     {
 		JSONObject jb = null;
 		

@@ -31,6 +31,7 @@ import com.game.helper.activity.WebActivity;
 import com.game.helper.activity.home.GameDetailActivity;
 import com.game.helper.db.manager.DBManager;
 import com.game.helper.download.bean.AppContent;
+import com.game.helper.download.downloador.DownloadTask;
 import com.game.helper.installPackage.MonitorSysReceiver;
 import com.game.helper.leopardkit.DownLoadModel;
 import com.game.helper.net.base.BaseBBXTask.Back;
@@ -42,6 +43,7 @@ import com.yuan.leopardkit.LeopardHttp;
 import com.yuan.leopardkit.db.HttpDbUtil;
 import com.yuan.leopardkit.download.DownLoadManager;
 import com.yuan.leopardkit.download.model.DownloadInfo;
+import com.yuan.leopardkit.download.task.DownLoadTask;
 import com.yuan.leopardkit.interfaces.IProgress;
 
 import java.io.File;
@@ -445,13 +447,13 @@ public class SpecialgameAdapter extends BaseAdapter {
                     @Override
                     public void onProgress(long progress, long total, boolean done) {
                         //if(progress>0){
-                        String tn = Thread.currentThread().getName();
-                        DownloadInfo infos = info.getDownLoadTask().getDownloadInfo();
-                        downLoadModel.setmAppContent(mAppContent);
-                        downLoadModel.setInfo(infos);
-//                        downLoadModel.needRefreshAdapter = false;
-//
-//                        setData(downLoadModel, infos, postion, true);
+                        DownLoadTask downloadTask = info.getDownLoadTask();
+                        DownloadInfo infos = null;
+                        if(null != downloadTask){
+                            infos = downloadTask.getDownloadInfo();
+                            downLoadModel.setmAppContent(mAppContent);
+                            downLoadModel.setInfo(infos);
+                        }
 
                         EventBus.getDefault().post(downLoadModel);
 

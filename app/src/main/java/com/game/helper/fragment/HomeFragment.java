@@ -100,8 +100,6 @@ import cn.trinea.android.common.util.ListUtils;
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import de.greenrobot.event.EventBus;
 
-;
-
 @SuppressLint("ValidFragment")
 /**
  * @Description 首页

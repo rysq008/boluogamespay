@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -15,13 +16,15 @@ import android.database.Cursor;
 import android.provider.MediaStore.Audio.Albums;
 import android.provider.MediaStore.Images.Media;
 import android.provider.MediaStore.Images.Thumbnails;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 public class AlbumHelper {
 	final String TAG = getClass().getSimpleName();
 	Context context;
 	ContentResolver cr;
-	
+
 	HashMap<String, String> thumbnailList = new HashMap<String, String>();
 
 	List<HashMap<String, String>> albumList = new ArrayList<HashMap<String, String>>();

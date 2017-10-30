@@ -169,7 +169,9 @@ public class CommunityFragment extends BaseFragment implements MsetV {
                 view2.setOnClickListener(new txListener(1));
                 view3.setOnClickListener(new txListener(2));
                 view4.setOnClickListener(new txListener(3));
-                currIndex = getActivity().getIntent().getIntExtra("currIndex", 0);
+                if(null != getActivity() && !getActivity().isFinishing() && null != getActivity().getIntent()){
+                    currIndex = getActivity().getIntent().getIntExtra("currIndex", 0);
+                }
                 initTextBar();
                 initViewPager();
             }

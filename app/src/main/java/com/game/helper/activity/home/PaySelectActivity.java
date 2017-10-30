@@ -223,7 +223,7 @@ public class PaySelectActivity extends BaseActivity implements OnWeiXinPayFinish
 
     @Override
     @OnClick({R.id.top_left_layout, R.id.iv_select0, R.id.iv_select1
-            , R.id.btn_cancel/*, R.id.iv_select10*/, R.id.iv_select11,R.id.btn_ensure})
+            , R.id.btn_cancel/*, R.id.iv_select10*/, R.id.iv_select11, R.id.btn_ensure})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cancel:
@@ -370,10 +370,10 @@ public class PaySelectActivity extends BaseActivity implements OnWeiXinPayFinish
                                     user.userId
                                     , getIntent().getStringExtra("ptb")
                                     , "" + (iv_Money)
-                                    );
+                            );
                             mPayWeixin.setMsetEnabledCallbackWX(PaySelectActivity.this);
                             mPayWeixin.pay();
-                        }  else if (key.equals("sc")) {
+                        } else if (key.equals("sc")) {
                             double cards = 0;
                            /* if (iv_select10.isSelected()) {
                                 cards = card;
@@ -452,7 +452,7 @@ public class PaySelectActivity extends BaseActivity implements OnWeiXinPayFinish
                         mPayAlipay.setOnAliPayFinishListener(PaySelectActivity.this);
                         mPayAlipay.setMsetEnabledCallback(PaySelectActivity.this);
                         mPayAlipay.pay();
-                    }  else if (key.equals("sc")) {
+                    } else if (key.equals("sc")) {
                         double cards = 0;
                        /* if (iv_select10.isSelected()) {
                             cards = card;

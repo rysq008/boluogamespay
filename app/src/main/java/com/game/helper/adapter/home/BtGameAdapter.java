@@ -648,7 +648,6 @@ public class BtGameAdapter extends BaseAdapter implements OnProgressListener {
                                     }
                                 }
                             } else {
-
                                 // 下载完成后弹出安装窗
                                 File file = new File(DownLoadManager.getManager().deFaultDir + infos.getFileName());
 //                                Intent intentInstall = new Intent();
